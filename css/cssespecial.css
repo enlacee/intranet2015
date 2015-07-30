@@ -1,0 +1,247 @@
+body{
+	background-color: #ccc;
+}
+input[type="submit"]{
+	text-transform: uppercase !important;
+	font-weight: bold;
+}
+input[type="text"], textarea, select, td{
+	text-transform: uppercase !important;
+}
+.padd-normal{
+	padding: 20px;
+}
+.centrado{
+	display: block;
+	margin: 0 auto;
+}
+.strong{
+	font-weight: bold !important;
+}
+.texto-centrado{
+	text-align: center;
+}
+.fontB{
+	font-weight: bold;
+}
+.color1{
+	background-color: #fff;
+}
+.pos-relative{
+	position: relative;
+	width: 100%;
+}
+.pos-absolute{
+	position: absolute !important;
+	right: -30px;
+}
+.lst-user{
+	position: absolute !important;
+	right: 17px;	
+	padding: 0 12px;
+	background-color: rgba(0, 0, 0, .5);
+	height: 40px;
+}
+.lst-user span, .lst-user p{
+	display: inline-block;
+	color: #ebebeb;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 40px;
+	text-transform: uppercase;
+	margin: 0;
+}
+.lst-user span{
+	margin-right: 8px;
+}
+.bsalir{
+	border-radius: 0 !important;
+	color: #fff !important;
+	font-weight: bold;
+	height: 40px !important;
+}
+.bsalir:hover{
+	background-color: #337AB7 !important;
+	color: #000 !important;
+}
+.select_alineado{
+	margin: 0 0 0 40px;
+}
+.bsmall{
+	display: inline-block;
+	width: 40%;	
+	padding: 4px;	
+	margin: 0 3px;
+}
+.bxl{
+	display: inline-block;
+	padding: 8px;
+	width: 40%;
+	margin: 0 auto;
+	font-weight: bold;
+	font-size: 16px;
+}
+.bconfirmar{
+	width: 40px;
+	display: inline-block;
+	margin: 0 10px;
+}
+.datepicker {
+  padding: 4px;
+  border-radius: 4px;
+  direction: ltr;
+  z-index:2000;
+}
+.div-mitad-izq, .div-mitad-der{
+	width: 50%;
+	display: inline-block;
+	vertical-align: top;
+}
+	.div-mitad-izq{
+		padding-right: 8px;
+	}
+	.div-mitad-der{
+		padding-left: 8px;
+	}
+.margin-derecho{
+	margin-right: 30px;
+}
+#mContForm2 .modal-dialog{
+	width: 800px;
+}
+.cont-compartido{
+	width: 50%;
+	display: inline-block;
+	padding: 5px;
+	vertical-align: top;
+}
+.con-btn{
+	padding: 2px !important;
+	text-align: center;
+}
+.con-head-btn{
+	padding: 8px 0 !important
+}
+/*   Vetana Modal Personalizada   */
+.porModal{
+	background-color: rgba(0, 0, 0, .5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 2000;
+	text-align: center;
+	display: none;
+	overflow-y: auto;
+}
+.cont-modalP{
+	display: inline-block;
+	vertical-align: middle;
+	width: 400px;
+	background-color: #4E5D6C;
+	margin-top: 25vh;	
+}
+.modalPTitulo{
+	width: 100%;
+	height: 50px;	
+	padding: 0 8px ;
+	text-align: left;
+	background-color: #485563;
+}
+.cont-table{
+	padding: 0 8px;
+}
+.modalPTitulo p{
+	line-height: 50px;
+	font-size: 16px;	
+	color: #fff;
+}
+.modalPCuerpo{
+	padding: 8px;
+	text-align: left;	
+}
+.modalPPie{
+	height: 54px;
+	padding: 8px;
+	text-align: right;
+	background-color: #485563;
+}
+.selPer{
+	width: 100%;
+	border: none;
+	margin: 0;
+	padding: 0;
+	min-height: 300px;
+}
+.selPer li:first-child{
+	border-top: 1px solid #e5e5e5;
+}
+.selPer li{
+	padding: 6px 0;
+	text-transform: uppercase;
+	border-bottom: 1px solid #e5e5e5;
+	list-style: none;
+}
+.panel-title a{
+	display: block !important;
+}
+.frm-centrado{
+	float: none;
+	margin: 0 auto;
+}
+.comSeparator{
+	margin-right: 50px;
+}
+option{
+	padding: 4px 8px;
+}
+/* Alert Fijo */
+.alert-fijo{
+	position: fixed;
+	bottom: 20px;
+	right: 40px;
+}
+.table-fondo{
+	background-color: #fff !important;	
+}
+/* Mensaje de confirmacion */
+.cont-mensaje{
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, .5);
+	position: fixed;
+	left: 0;
+	top: 0;
+	display: none;
+	z-index: 2050;
+}
+.mensaje{
+	width: 400px;
+	height: auto;	
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -200px;
+	margin-top: -65px;	
+}
+.header-mensaje{
+	background-color: #485563;
+	width: 100%;
+	height: 50px;
+	padding: 8px 16px;
+	color: #fff;
+}
+.header-mensaje{
+	line-height: 50px;
+}
+.body-mensaje{
+	background-color: #4E5D6C;
+	width: 100%;
+	height: 80px;	
+	padding: 16px;
+}
+.body-mensaje button{
+	margin-right: 20px;
+}
+/* Fin de mensaje de confirmacion */
