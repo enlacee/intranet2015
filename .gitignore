@@ -8,7 +8,10 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-# files extra no include
+# files : extra no include
 user_guide/*
 *.sql
 .travis.yml
+# files : applicaction
+application/config/database.php
+
