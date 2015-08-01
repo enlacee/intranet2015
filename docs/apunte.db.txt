@@ -1,0 +1,6 @@
+# database : zaimargr_zaimar
+
+### Tablas
+
+table.cliente = table.buyer
+	-adelanto : no se encontro funcionalidad
