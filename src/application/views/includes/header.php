@@ -56,7 +56,7 @@
                     <li><a href="#">REPORTS</a></li>
                     <?php } ?>
                     <?php if ($this->session->userdata('profile') == "1" || $this->session->userdata('profile') == "2" || $this->session->userdata('profile') == "3") { ?>
-                    <li><a href="#">ALLOCATIONS</a></li>
+                    <li><a href="<?php echo site_url('allocation'); ?>">ALLOCATIONS</a></li>
                     <?php } ?>
                     <?php if ($this->session->userdata('profile') == "1") { ?>
                     <li>

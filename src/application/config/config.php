@@ -16,7 +16,7 @@
 | environments.
 |
 */
-$config['base_url'] = 'http://zaimargroup.com/intranet2015/';
+$config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
