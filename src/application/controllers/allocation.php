@@ -1,29 +1,45 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Allocation extends CI_Controller {
+$file = FCPATH."application/core/MY_ControllerAdmin.php"; (is_file($file)) ? include($file) : die("error: {$file}");
+
+class Allocation extends MY_ControllerAdmin {
 
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('profile') != "1") {
-            redirect(site_url('panel'));
-        }       
+        if ($this->logueado == false) {
+            $this->getViewLogin();
+        }
     }
 
     public function index()
     {
-        if (trim($this->session->userdata('logueado')) != false) {
+        if ($this->logueado 
+            && ($this->logueadoData->id_perfil == MY_ControllerAdmin::PERFIL_1
+                || $this->logueadoData->id_perfil == MY_ControllerAdmin::PERFIL_2
+                || $this->logueadoData->id_perfil == MY_ControllerAdmin::PERFIL_3
+                || $this->logueadoData->id_perfil == MY_ControllerAdmin::PERFIL_4)
+        ) {
             $this->load->model('supplier_model');
             $data['titulo'] = ".:: Zaimar Group ::.";
             $data['list_supplier'] = $this->supplier_model->all();
+            // =============== code
+            $data['anio'] = !empty($this->input->get('anio'))
+                    ? $this->input->get('anio', true) : date('Y');
+            $data['accion'] = $this->input->get('accion');
+            $data['usuario'] = $this->input->get('usuario');
+            $data['usuario2'] = $this->input->get('usuario2');
+            
+    
+
+            // =============== code
             $this->load->view('includes/header', $data);
-            $this->load->view('supplier/list_supplier_view', $data);
+            $this->load->view('allocation/list_view', $data);
             $this->load->view('includes/footer');
         } else {
-            $data['token'] = $this->token();
-            $data['titulo'] = "Seguridad del Sistema";        
-            $this->load->view('login_view', $data);
+            redirect(site_url('login/sinpermiso'));
         }
+
     }   
 
     public function create()

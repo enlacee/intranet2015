@@ -8,6 +8,7 @@
     <title><?php echo $titulo; ?></title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/custom.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/cssespecial.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>css/datepicker.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -55,9 +56,13 @@
                     <?php if ($this->session->userdata('profile') == "1" || $this->session->userdata('profile') == "2" || $this->session->userdata('profile') == "3" || $this->session->userdata('profile') == "4") { ?>
                     <li><a href="#">REPORTS</a></li>
                     <?php } ?>
-                    <?php if ($this->session->userdata('profile') == "1" || $this->session->userdata('profile') == "2" || $this->session->userdata('profile') == "3") { ?>
-                    <li><a href="<?php echo site_url('allocation'); ?>">ALLOCATIONS</a></li>
-                    <?php } ?>
+                    <?php if ($this->session->userdata('profile') == "1" 
+                            || $this->session->userdata('profile') == "2" 
+                            || $this->session->userdata('profile') == "3"
+                            || $this->session->userdata('profile') == "4") : 
+                    ?>
+                        <li><a href="<?php echo site_url('allocation'); ?>">ALLOCATIONS</a></li>
+                    <?php endif; ?>
                     <?php if ($this->session->userdata('profile') == "1") { ?>
                     <li>
                         <div class="dropdown">

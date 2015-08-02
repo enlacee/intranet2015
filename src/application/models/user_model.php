@@ -3,9 +3,10 @@
 class User_Model extends CI_Model{
 
 	public function validar_login()
-	{
-        $this->db->select('login, profile');
-		$this->db->where('login', $this->input->post('username'));
+	{   
+        //$this->db->select('login, profile');
+		$this->db->select('login, id_perfil, id_buyer, login as usuario, profile');
+        $this->db->where('login', $this->input->post('username'));
 		$this->db->where('password', sha1($this->input->post('userpassword')));
 		$usuario = $this->db->get('user');
 		if($usuario->num_rows() == 1)

@@ -4,7 +4,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-		if (trim($this->session->userdata('logueado')) != FALSE) {
+		if (trim($this->session->userdata('logueado')) == true) {
 			redirect('panel');
 		} else {
 			$data['token'] = $this->token();
@@ -12,8 +12,13 @@ class Login extends CI_Controller {
 			$this->load->view('login_view', $data);			
 		}
 	}
+    
+    public function sinpermiso()
+    {
+        $this->load->view('login_view_sinpermiso');		
+    }
 
-	public function validar_user()
+    public function validar_user()
 	{
 		if($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token'))
 		{
@@ -31,7 +36,12 @@ class Login extends CI_Controller {
 				$usuario_activo = $this->user_model->validar_login();
 				if($usuario_activo == TRUE)
 				{
-					$data = array('logueado' => TRUE, 'profile' => $usuario_activo->profile, 'login' => $usuario_activo->login);
+					$data = array(
+                        'logueado' => TRUE,
+                        'profile' => $usuario_activo->profile,
+                        'login' => $usuario_activo->login,
+                        'loginData' => $usuario_activo
+                    );
 					$this->session->set_userdata($data);
 					$this->index();
 				}

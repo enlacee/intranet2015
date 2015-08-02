@@ -3,7 +3,7 @@
 class Panel extends CI_Controller {
 
 	public function index()
-	{
+	{var_dump($this->session->all_userdata());
 		if ($this->session->userdata('logueado') != false) {
 			$data['titulo'] = ".:: Zaimar Group ::.";						
 			$this->load->view('includes/header', $data);
