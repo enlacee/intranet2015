@@ -1,0 +1,765 @@
+
+<!-- saved from url=(0060)http://208.43.26.211/~zaimargr/intranet_2/inside_agregar.php -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+<title>.:: Zaimar Group ::.</title>
+
+<script language="javascript">strPg="payment_add"; </script>
+
+<script language="javascript" src="./pop_07___ Zaimar Group __Add New Inside Pers._files/navigate.js"></script>
+
+<script language="javascript">
+
+function cancelar(){
+
+ window.close();}
+
+function on_agregar1(){
+
+if(confirm("Want to burn Inside?")){
+
+	frm2.accion.value="save1";
+
+	frm2.action="inside_agregar.php";
+
+	frm2.submit();	
+
+}else{
+
+		
+
+				}
+
+
+
+}
+
+function on_delete(user){
+
+
+
+		if(confirm("Remove ?"))
+
+		{
+
+					frm2.usuario.value=user;
+
+					frm2.accion.value="delete";
+
+					frm2.action="inside_agregar.php";
+
+					frm2.submit();
+
+		}
+
+		else{
+
+					
+
+					}
+
+}
+
+
+
+function browse(){
+
+	window.open("clientes2.php","buscar","top=247,left=309,width=449,height=289,status=no,location=no,menubar=no");
+
+}
+
+function on_filtro(xform){
+
+var	$cod_equi=document.frm2.cod_equi.value;
+
+xform.action="equipo.php";
+
+xform.submit();
+
+}
+
+function on_filtratodo(xform){
+
+xform.action="equipo.php";
+
+
+
+xform.submit();
+
+}
+
+</script>
+
+
+
+<style type="text/css">
+
+<!--
+
+a:link {
+
+	color: #003366;
+
+	text-decoration: none;
+
+}
+
+a:visited {
+
+	color: #003366;
+
+	text-decoration: none;
+
+}
+
+a:hover {
+
+	color: #FF6600;
+
+	text-decoration: underline;
+
+}
+
+a:active {
+
+	color: #FF6600;
+
+	text-decoration: none;
+
+}
+
+.Estilo1 {
+
+	font-family:Times New Roman;
+
+	font-size: 17px;
+
+	color: #003366;
+
+}
+
+
+
+.campo { font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 10px;
+
+	color: #003366; height: 15px; 
+
+	}
+
+body {
+
+	margin-left: 0px;
+
+	margin-top: 0px;
+
+	margin-right: 0px;
+
+	margin-bottom: 0px;
+
+	background-image: url();
+
+	background-color: #FFFFFF;
+
+}
+
+.Estilo18 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 12px;
+
+}
+
+.Estilo13 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size: 11px;}
+
+.Estilo20 {
+
+	font-size: 14px;
+
+	font-weight: bold;
+
+}
+
+.Estilo31 {font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #003366; }
+
+-->
+
+</style>
+
+</head><body><div id="popCal" style="BORDER-RIGHT: 2px ridge; BORDER-TOP: 2px ridge; Z-INDEX: 100; VISIBILITY: hidden; BORDER-LEFT: 2px ridge; WIDTH: 10px; BORDER-BOTTOM: 2px ridge; POSITION: absolute" onclick="event.cancelBubble=true"><iframe name="popFrame" src="./pop_07___ Zaimar Group __Add New Inside Pers._files/popcj.html" frameborder="0" width="183" scrolling="no" height="188"></iframe></div>
+
+
+
+<script event="onclick()" for="document">popCal.style.visibility = "hidden";
+
+</script>
+
+
+
+
+
+<!-- Copyright 2000,2001 Macromedia, Inc. All rights reserved. -->
+
+<!-- Copyright 2000,2001 Macromedia, Inc. All rights reserved. -->
+
+<!-- Copyright 2000,2001 Macromedia, Inc. All rights reserved. -->
+
+
+
+
+
+<form action="" method="post" name="frm2">
+
+  <table width="51%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#666666" bgcolor="#FFFFFF">
+
+    <tbody><tr>
+
+      <td height="19"><div align="center" class="Estilo1 Estilo18 Estilo20">Add New  Inside Pers
+
+          <input name="accion" type="hidden">
+
+        
+
+          <input name="usuario" type="hidden" value="">
+
+          <hr>
+
+      </div></td>
+
+    </tr>
+
+    <tr>
+
+      <td height="42" align="center" valign="bottom"><label class="Estilo31"> Enter Name      </label>
+
+        :
+
+        <input name="nombre" type="text" id="nombre">        <input type="button" name="Submit" value="Aceptar " onclick="on_agregar1()"></td>
+
+    </tr>
+
+    <tr>
+
+      <td height="261" valign="top"><table width="393" border="1" align="center" cellpadding="1" cellspacing="0" bordercolor="#C1C4CE" bgcolor="#FFFFFF" style="border-collapse: collapse">
+
+          <tbody><tr>
+
+            <td width="267" bgcolor="#E8EFF5"><div align="center" class="Estilo13">Name</div></td>
+
+            <td width="96" bgcolor="#E8EFF5"><div align="center" class="Estilo13">State</div></td>
+
+            <td width="16" bgcolor="#E8EFF5">&nbsp;</td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                -
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(1);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                aburgos
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(22);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                AGOYTIZOLO
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(31);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                Carlos
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(16);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                Christian
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(15);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                CMANZANARES
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(32);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                DOYOLA
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(30);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                ERAMIREZ
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(33);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                fnavarro
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(19);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                fromero
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(21);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                froque
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(26);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                FVALDEZ
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(27);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                HLINDNER
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(28);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                JNORIEGA
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(29);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                jrodriguez
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                D
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(24);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                secretaria
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(20);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                TRADE1
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(34);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                TRADE2
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(35);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                TRADE3
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(36);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                TRADE4
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(37);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                TRADE5
+                </span></div></td>
+
+            <td height="22" bgcolor="#FFFFFF"><div align="center">
+
+                <span class="Estilo13">
+
+                A
+                </span></div></td>
+
+            <td bgcolor="#FFFFFF" class="Estilo13"><img src="./pop_07___ Zaimar Group __Add New Inside Pers._files/delete.gif" onclick="javascript:on_delete(38);" style="cursor:pointer">
+
+                          </td>
+
+          </tr>
+
+          
+          <tr bgcolor="#FAFAFA">
+
+            <td height="24" colspan="2">&nbsp;</td>
+
+            <td>&nbsp;</td>
+
+          </tr>
+
+            </tbody></table></td>
+
+    </tr>
+
+    <tr>
+
+      <td height="19" valign="top">&nbsp;</td>
+
+    </tr>
+
+    </tbody></table>
+
+</form>
+
+
+
+<div id="gtx-trans" style="position: absolute; left: 120px; top: 18px;"><div class="gtx-trans-icon"></div></div></body></html>

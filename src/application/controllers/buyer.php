@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * (table.cliente)
+ */
 class Buyer extends CI_Controller {
 
     public function __construct()

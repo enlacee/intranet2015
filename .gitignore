@@ -1,4 +1,6 @@
 
 docs/db/zaimargr_zaimar.mwb
 docs/db/zaimargr_zaimar.mwb.bak
+docs/zaimargr_zaimar.sql
 .travis.yml
+/nbproject/private/

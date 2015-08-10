@@ -1,9 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * (table.cliente)
+ */
 class Buyer_Model extends CI_Model{
+    
+    private $table;
 
     public function __construct() {
         parent::__construct();
+        $this->table = 'buyer';
     }
 
     public function all()
@@ -104,4 +109,17 @@ class Buyer_Model extends CI_Model{
             $this->session->set_flashdata('delete', 1);
         }        
     }
+    
+    //#########################################################################
+    /**
+     * @author Anibal copitan
+     * @return type
+     */
+    public function getlistcliente() {
+        $query = $this->db->get($this->table);
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+    }
+    
 }

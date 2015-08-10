@@ -6,33 +6,33 @@
     <div class="row">
         <div class="col-md-5">
             <form action ="" method="GET">
-                <div class="red">  
-			accion<input name="accion" type="text" value="<?php //echo $accion; ?>" />
-			usu1<input name="usuario" type="text" value="<?php //echo $usu; ?>" />
-            usu2<input name="usuario2" type="text" value="<?php //echo $usu; ?>" />
-        </div>
-                
+                <div style="display: none">  
+                    <input name="login" type="text" value="<?php echo $this->loginData->login;  ?>" />
+                    <input name="id_perfil" type="text" value="<?php echo $this->loginData->id_perfil;  ?>" />
+                </div>
+
                 <div class="form-group">
-                    <div class="col-md-3 ">
-                        <label for="anio" class="control-label" style="color: black"><b>Select list:</b></label>
+                    <div class="col-md-4 ">
+                        <label for="anio" class="control-label" style="color: black"><b>Select Year : </b></label>
                     </div>
 
                     <div class="col-md-4">
+                        <div class="input-group">
                         <select name="anio" class=" form-control col-lg-5" id="anio" onchange="this.form.submit();">
                             <option value="">Select a year </option> 
-                            <?php
-                            $anioactual=  date("Y"); ?>
+                            <?php $anioactual = date("Y"); ?>
                             <?php for ($i = $anioactual; $i >= 2000; $i--): ?>
                                 <?php $selected = ($anio == $i) ? 'selected' : '' ?>
                                 <option value="<?php echo $i ?>" <?php echo $selected ?>><?php echo $i ?></option> 
                             <?php endfor; ?>
                         </select> 
+                        </diV>
                     </div>
                     <div class="col-md-4">
-                        <input name="btnNew" type="button" class="btn btn-default" onclick="addNew(this.form)" value="&nbsp;Add&nbsp;">
+                        <input name="btnNew" type="button" class="btn btn-default" onclick="addNew(this.form, '<?php echo site_url("allocation/create") ?>')" value="&nbsp;Add&nbsp;">
                     </div>
                 </div>
-                
+
 
             </form>
 
@@ -83,7 +83,7 @@
         <strong>Information!</strong> Suppliers removed properly.
     </div>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             function close_alert() {
                 $('#oAlert').alert('close');
             }
@@ -93,19 +93,19 @@
 <?php } ?>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#bAbrirVenMod').click(function(event) {
+    $(document).ready(function () {
+        $('#bAbrirVenMod').click(function (event) {
             event.preventDefault();
             $('#mContForm2').load('<?php echo site_url("supplier/create"); ?>');
         });
 
         $('[data-toggle="popover"]').popover({html: true});
 
-        $('.bEdit').click(function(event) {
+        $('.bEdit').click(function (event) {
             event.preventDefault();
             var nId = $(this).data('id');
             $('#mContForm').html('');
-            $.get('<?php echo site_url("supplier/edit"); ?>', {id: nId}, function(data) {
+            $.get('<?php echo site_url("supplier/edit"); ?>', {id: nId}, function (data) {
                 $('#mContForm').html(data);
             });
         });

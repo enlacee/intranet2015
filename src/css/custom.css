@@ -1,3 +1,32 @@
 .red {
-    border: 1px solid red;
+    border: 0px solid red;
+}
+
+.container{
+    background-color: white;
+}
+
+.form-group-black>label{
+    color: black;
+}
+.form-group-black input[type=text],
+.form-group-black input[type=text]:focus,
+.form-group-black select, .form-group-black select:focus
+{
+    border:1px solid black;
+}
+
+.bg-color-gray {
+    background-color:#F2F2F2;
+}
+
+/* important*/
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.sublabel{
+    color:black;
+    font-size: 12px;
+    font-weight: 500;
 }

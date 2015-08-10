@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+/**
+ * table inside
+ */
 class Employee_Model extends CI_Model{
 
 	public function for_user()

@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0051)http://208.43.26.211/~zaimargr/intranet_2/popcj.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"><title>Untitled</title>
+
+<meta content="MSHTML 6.00.2600.0" name="GENERATOR"></head>
+<body leftmargin="0" topmargin="0">
+<script language="JScript">
+<!-- Begin  //place these scripts within BODY tag if you are using IE 4.0 or below.
+//****************************************************************************
+// PopCalendar 4.1, Emailware(please mail&commend me if u like it)
+// Originally coded by Liming(Victor) Weng, email: victorwon@netease.com
+// Release date: 2000.5.9
+// Anyone may modify it to satify his needs, but please leave this comment ahead.
+//****************************************************************************
+//fPopCalendar
+var gdCtrl = new Object();
+var gcGray = "#808080";
+var gcToggle = "#CCCCCC";
+var gcBG = "#ffffff";
+
+var gdCurDate = new Date();
+var giYear = gdCurDate.getFullYear();
+var giMonth = gdCurDate.getMonth()+1;
+var giDay = gdCurDate.getDate();
+var VicPopCal = new Object();
+
+//****************************************************************************
+// Param: popCtrl is the widget beyond which you want this calendar to appear;
+//        dateCtrl is the widget into which you want to put the selected date;
+//        popCal is the widget to display the calendar;  
+// i.e.: <input type="text" name="dc" style="text-align:center" readonly><INPUT type="button" value="V" onclick="fPopCalendar(dc,dc,popCal);return false">
+//****************************************************************************
+
+function Comparar_Fecha(Obj1,Obj2) 
+{
+String1 = Obj1;
+String2 = Obj2;
+// Si los dias y los meses llegan con un valor menor que 10 
+// Se concatena un 0 a cada valor dentro del string 
+if (String1.substring(1,2)=="/") {
+String1="0"+String1
+}
+if (String1.substring(4,5)=="/"){
+String1=String1.substring(0,3)+"0"+String1.substring(3,9)
+}
+
+if (String2.substring(1,2)=="/") {
+String2="0"+String2
+}
+if (String2.substring(4,5)=="/"){
+String2=String2.substring(0,3)+"0"+String2.substring(3,9)
+}
+
+dia1=String1.substring(0,2);
+mes1=String1.substring(3,5);
+anyo1=String1.substring(6,10);
+dia2=String2.substring(0,2);
+mes2=String2.substring(3,5);
+anyo2=String2.substring(6,10);
+
+
+if (dia1 == "08") // parseInt("08") == 10 base octogonal
+dia1 = "8";
+if (dia1 == '09') // parseInt("09") == 11 base octogonal
+dia1 = "9";
+if (mes1 == "08") // parseInt("08") == 10 base octogonal
+mes1 = "8";
+if (mes1 == "09") // parseInt("09") == 11 base octogonal
+mes1 = "9";
+if (dia2 == "08") // parseInt("08") == 10 base octogonal
+dia2 = "8";
+if (dia2 == '09') // parseInt("09") == 11 base octogonal
+dia2 = "9";
+if (mes2 == "08") // parseInt("08") == 10 base octogonal
+mes2 = "8";
+if (mes2 == "09") // parseInt("09") == 11 base octogonal
+mes2 = "9";
+
+dia1=parseInt(dia1);
+dia2=parseInt(dia2);
+mes1=parseInt(mes1);
+mes2=parseInt(mes2);
+anyo1=parseInt(anyo1);
+anyo2=parseInt(anyo2);
+
+if (anyo1>anyo2)
+{
+return false;
+}
+
+if ((anyo1==anyo2) && (mes1>mes2))
+{
+return false;
+}
+if ((anyo1==anyo2) && (mes1==mes2) && (dia1>dia2))
+{
+return false;
+} 
+
+return true;
+}
+
+
+//********************************************************************
+//**********************************************************************
+function fPopCalendar(popCtrl, dateCtrl, popCal){
+  parent.event.cancelBubble=true;
+  VicPopCal = popCal;
+  gdCtrl = dateCtrl;
+  fSetYearMon(giYear, giMonth);
+  var point = fGetXY(popCtrl);
+  with (VicPopCal.style) {
+  	left = point.x;
+	top  = point.y+popCtrl.offsetHeight+1;
+	visibility = 'visible';
+  }
+  VicPopCal.focus();
+  // in order to make compatible with IE4.x , here I cut two line below off.
+  // VicPopCal.all("popFrame").width=document.all("popTable").offsetWidth;
+  // VicPopCal.all("popFrame").height=document.all("popTable").offsetHeight;
+  // if u only target on IE5.x, uncommented them and delete the width&height prop in <IFrame> tag
+  // thus you will find the 3rd para in fDrawCal() now works perfectly.
+}
+
+function fSetDate(iYear, iMonth, iDay){
+  var mes = new String(iMonth);
+  	if(mes.length == 1){
+		mes = "0"+mes;
+	}	
+
+  var dia = new String(iDay);
+  	if(dia.length == 1){
+		dia = "0"+dia;
+	}	
+	
+  //gdCtrl.value = iYear+"-"+mes+"-"+dia; //Here, you could modify the locale as you need !!!!
+  gdCtrl.value = dia+"-"+mes+"-"+iYear; //Here, you could modify the locale as you need !!!!
+  fecha_mayor = dia+"-"+mes+"-"+iYear; //Here, you could modify the locale as you need !!!!
+  
+  
+  var mydate=new Date();
+var year=mydate.getYear();
+if (year < 1000)
+year+=1900;
+var day=mydate.getDay();
+var month=mydate.getMonth()+1;
+if (month<10)
+month="0"+month;
+var daym=mydate.getDate();
+if (daym<10)
+daym="0"+daym;
+fecha_menor=(daym+"-"+month+"-"+year)
+
+  
+//if (!Comparar_Fecha(fecha_menor, fecha_mayor)){
+//alert("La fecha seleccionada es menor que la fecha actual.");
+//return;
+//};
+
+  
+  VicPopCal.style.visibility = "hidden";
+}
+
+function fSetSelected(aCell){
+  var iOffset = 0;
+  var iYear = parseInt(tbSelYear.value);
+  var iMonth = parseInt(tbSelMonth.value);
+
+  aCell.bgColor = gcBG;
+  with (aCell.children["cellText"]){
+  	var iDay = parseInt(innerText);
+  	if (color==gcGray)
+		iOffset = (Victor<10)?-1:1;
+	iMonth += iOffset;
+	if (iMonth<1) {
+		iYear--;
+		iMonth = 12;
+	}else if (iMonth>12){
+		iYear++;
+		iMonth = 1;
+	}
+  }
+  fSetDate(iYear, iMonth, iDay);
+}
+
+function Point(iX, iY){
+	this.x = iX;
+	this.y = iY;
+}
+
+function fBuildCal(iYear, iMonth) {
+  var aMonth=new Array();
+  for(i=1;i<7;i++)
+  	aMonth[i]=new Array(i);
+
+  var dCalDate=new Date(iYear, iMonth-1, 1);
+  var iDayOfFirst=dCalDate.getDay();
+  var iDaysInMonth=new Date(iYear, iMonth, 0).getDate();
+  var iOffsetLast=new Date(iYear, iMonth-1, 0).getDate()-iDayOfFirst+1;
+  var iDate = 1;
+  var iNext = 1;
+
+  for (d = 0; d < 7; d++)
+	aMonth[1][d] = (d<iDayOfFirst)?-(iOffsetLast+d):iDate++;
+  for (w = 2; w < 7; w++)
+  	for (d = 0; d < 7; d++)
+		aMonth[w][d] = (iDate<=iDaysInMonth)?iDate++:-(iNext++);
+  return aMonth;
+}
+
+function fDrawCal(iYear, iMonth, iCellWidth, iDateTextSize) {
+  var WeekDay = new Array("Do","Lu","Ma","Mi","Ju","Vi","Sa");
+  var styleTD = " bgcolor='"+gcBG+"' width='"+iCellWidth+"' bordercolor='"+gcBG+"' valign='middle' align='center'  style='font: "+iDateTextSize+" Verdana, Arial, Helvetica, sans-serif;";            //Coded by Liming Weng(Victor Won)  email:victorwon@netease.com
+
+  with (document) {
+	write("<tr>");
+	for(i=0; i<7; i++)
+		write("<td "+styleTD+"color:#006699' >" + WeekDay[i] + "</td>");
+	write("</tr>");
+
+  	for (w = 1; w < 7; w++) {
+		write("<tr>");
+		for (d = 0; d < 7; d++) {
+			write("<td id=calCell "+styleTD+"cursor:hand;' onMouseOver='this.bgColor=gcToggle' onMouseOut='this.bgColor=gcBG' onclick='fSetSelected(this)'>");
+			write("<font id=cellText Victor='Liming Weng'> </font>");
+			write("</td>")
+		}
+		write("</tr>");
+	}
+  }
+}
+
+function fUpdateCal(iYear, iMonth) {
+  myMonth = fBuildCal(iYear, iMonth);
+  var i = 0;
+  for (w = 0; w < 6; w++)
+	for (d = 0; d < 7; d++)
+		with (cellText[(7*w)+d]) {
+			Victor = i++;
+			if (myMonth[w+1][d]<0) {
+				color = gcGray;
+				innerText = -myMonth[w+1][d];
+			}else{
+				color = ((d==0)||(d==6))?"#8B1835":"#003366";
+				innerText = myMonth[w+1][d];
+			}
+		}
+}
+
+function fSetYearMon(iYear, iMon){
+  tbSelMonth.options[iMon-1].selected = true;
+  for (i = 0; i < tbSelYear.length; i++)
+	if (tbSelYear.options[i].value == iYear)
+		tbSelYear.options[i].selected = true;
+  fUpdateCal(iYear, iMon);
+}
+
+function fPrevMonth(){
+  var iMon = tbSelMonth.value;
+  var iYear = tbSelYear.value;
+
+  if (--iMon<1) {
+	  iMon = 12;
+	  iYear--;
+  }
+
+  fSetYearMon(iYear, iMon);
+}
+
+function fNextMonth(){
+  var iMon = tbSelMonth.value;
+  var iYear = tbSelYear.value;
+
+  if (++iMon>12) {
+	  iMon = 1;
+	  iYear++;
+  }
+
+  fSetYearMon(iYear, iMon);
+}
+
+function fGetXY(aTag){
+  var oTmp = aTag;
+  var pt = new Point(0,0);
+  do {
+  	pt.x += oTmp.offsetLeft;
+  	pt.y += oTmp.offsetTop;
+  	oTmp = oTmp.offsetParent;
+  } while(oTmp.tagName!="BODY");
+  return pt;
+}
+
+var gMonths = new Array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Set","Oct","Nov","Dic");
+
+with (document) {
+write("<table id='popTable' border='0' bgcolor='#E4E4E4' style='font:Verdana, Arial, Helvetica, sans-serif' >");
+write("<TR>");
+write("<td valign='middle' align='center'><input type='button' name='PrevMonth' value='<' style='height:20;width:20;FONT:16 Fixedsys' onClick='fPrevMonth()'>");
+write("&nbsp;<select name='tbSelMonth' onChange='fUpdateCal(tbSelYear.value, tbSelMonth.value)' Victor='Won' style='font:Verdana, Arial, Helvetica, sans-serif;font-size: 12px;'>");
+for (i=0; i<12; i++)
+	write("<option value='"+(i+1)+"'>"+gMonths[i]+"</option>");
+write("</SELECT>");
+write("&nbsp;<SELECT name='tbSelYear' onChange='fUpdateCal(tbSelYear.value, tbSelMonth.value)' Victor='Won' style='font:Verdana, Arial, Helvetica, sans-serif;font-size: 12px;'>");
+for(i=1990;i<2015;i++)
+	write("<OPTION value='"+i+"'>"+i+"</OPTION>");
+write("</SELECT>");
+write("&nbsp;<input type='button' name='PrevMonth' value='>' style='height:20;width:20;FONT:16 Fixedsys' onclick='fNextMonth()'>");
+write("</td>");
+write("</TR><TR>");
+write("<td align='center'>");
+write("<DIV style='background-color:#E4E4E4;'><table width='100%' border='0' cellpadding='2'>");
+fDrawCal(giYear, giMonth, 19, 12);
+write("</table></DIV>");
+write("</td>");
+write("</TR><TR><TD align='center'>");
+write("<font style='cursor:hand;font:Verdana, Arial, Helvetica, sans-serif;font-size:12px' onclick='fSetDate(giYear,giMonth,giDay)' onMouseOver='this.style.color=gcToggle' onMouseOut='this.style.color=0'>Hoy:&nbsp;&nbsp;"+gMonths[giMonth-1]+"&nbsp;"+giDay+",&nbsp;"+giYear+"</font>");
+write("</TD></TR>");write("</TD></TR>");
+write("</TABLE>");
+}
+// End -- Coded by Liming Weng, email: victorwon@netease.com -->
+</script><table id="popTable" border="0" bgcolor="#E4E4E4" style="font:Verdana, Arial, Helvetica, sans-serif"><tbody><tr><td valign="middle" align="center"><input type="button" name="PrevMonth" value="&lt;" style="height:20;width:20;FONT:16 Fixedsys" onclick="fPrevMonth()">&nbsp;<select name="tbSelMonth" onchange="fUpdateCal(tbSelYear.value, tbSelMonth.value)" victor="Won" style="font:Verdana, Arial, Helvetica, sans-serif;font-size: 12px;"><option value="1">Ene</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Abr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Ago</option><option value="9">Set</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dic</option></select>&nbsp;<select name="tbSelYear" onchange="fUpdateCal(tbSelYear.value, tbSelMonth.value)" victor="Won" style="font:Verdana, Arial, Helvetica, sans-serif;font-size: 12px;"><option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1993">1993</option><option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option></select>&nbsp;<input type="button" name="PrevMonth" value="&gt;" style="height:20;width:20;FONT:16 Fixedsys" onclick="fNextMonth()"></td></tr><tr><td align="center"><div style="background-color:#E4E4E4;"><table width="100%" border="0" cellpadding="2"><tbody><tr><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Do</td><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Lu</td><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Ma</td><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Mi</td><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Ju</td><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Vi</td><td bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;color:#006699">Sa</td></tr><tr><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td></tr><tr><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td></tr><tr><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td></tr><tr><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td></tr><tr><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td></tr><tr><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td><td id="calCell" bgcolor="#ffffff" width="19" bordercolor="#ffffff" valign="middle" align="center" style="font: 12 Verdana, Arial, Helvetica, sans-serif;cursor:hand;" onmouseover="this.bgColor=gcToggle" onmouseout="this.bgColor=gcBG" onclick="fSetSelected(this)"><font id="cellText" victor="Liming Weng"> </font></td></tr></tbody></table></div></td></tr><tr><td align="center"><font style="cursor:hand;font:Verdana, Arial, Helvetica, sans-serif;font-size:12px" onclick="fSetDate(giYear,giMonth,giDay)" onmouseover="this.style.color=gcToggle" onmouseout="this.style.color=0">Hoy:&nbsp;&nbsp;Ago&nbsp;1,&nbsp;2015</font></td></tr></tbody></table>
+
+</body></html>
