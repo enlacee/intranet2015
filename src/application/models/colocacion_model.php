@@ -86,6 +86,7 @@ class Colocacion_Model extends CI_Model {
         } elseif (!empty($limit)) {
             $this->db->limit($limit);
         }
+        $this->db->order_by('nombre asc'); 
 
         $query = $this->db->get();
         if ($rows == true) {

@@ -43,35 +43,40 @@ class Allocation extends MY_ControllerAdmin {
 
     public function create()
     {
-        $data['id_perfil'] = $this->loginData->id_perfil;
-        
+       $data['id_perfil'] = $this->loginData->id_perfil;
+        $this->load->model('supplier_model');
         
         if ($this->input->get_post()) {
-            $this->load->model('supplier_model');
             $this->supplier_model->create();
             redirect(site_url('supplier'));
         } else {
             $this->load->model('buyer_model');
             $this->load->model('colocacion_model');
-            $this->load->model('empleado_model');
            
             $data['titulo'] = PUBLIC_URL;
             $data['clientes'] = $this->buyer_model->getlistcliente();
             $data['products'] = array();
             //$this->colocacion_model->get_list_anio_detalle_colocaciones($id_colocaciones,$myinside);
             $data['partners'] = $this->colocacion_model->get_partner(array(),100);
-            $data['empleados'] = $this->empleado_model->getList();
+            $data['empleados'] = $this->supplier_model->getList();
             
             $data['anio'] = date('Y');
+     
+            $this->createScript();
             $this->layout->view('allocation/create.php', $data);
-            
-            //$this->load->view('includes/header', $data);            
-            //$this->load->view('allocation/create.php', $data);
-            //$this->load->view('includes/footer');
         }
-        
+    }
+    
+    private function createScript() {
+        $str = <<<EOD
+        $(document).ready(function() {
+            $("#dates").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#etd").datepicker({ dateFormat: 'dd-mm-yy' });
+            $("#eta").datepicker({ dateFormat: 'dd-mm-yy' });
+        });
+EOD;
 
-        
+        $this->loadStatic(array("jstring" => $str));        
     }
 
     public function edit()
@@ -107,5 +112,25 @@ class Allocation extends MY_ControllerAdmin {
             $data['listcountry'] = $this->country_model->all();
             $this->load->view('supplier/country_create_view', $data);
         }            
-    } 
+    }
+    
+    /**
+     * return JSON
+     */
+    public function json_producto_por_proveedor()
+    {
+        $idProveedor = $this->input->get('id_proveedor');
+        
+        if (!empty($idProveedor)) {
+            $this->load->model('supplier_model');
+            $data = $this->supplier_model->getProductosByProveedorJson($idProveedor);
+
+            //add the header here
+            header('Content-Type: application/json');
+            echo json_encode($data);
+        }
+
+        
+    }
+    
 }

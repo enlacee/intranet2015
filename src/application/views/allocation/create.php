@@ -266,14 +266,35 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Inside Comm</label>
                 <div class="col-md-10 nopadding">                        
-                    <div class="col-md-5">
-                        <select name="insid" class="form-control col-md-5" id="insid" onchange="insides();">
+                    <div class="col-md-3">
+                        <select name="insid" class="form-control col-md-5" id="insid" onchange="showItemInputsInsideComision();">
                               <option>-------------</option>
                               <option value="2">Cantidad</option>
                               <option value="3">Monto</option>
                               <option value="1">Porcentaje</option>
                             </select>
                         
+                    </div>
+                    <div class="col-md-7">
+                        <ul id="inside-comision-extra">
+                            <li>
+                                <span>= Q'ty *
+                                <input name="cant16" type="text" value="" size="5">
+                                </span>
+                            </li>
+                            <li>
+                                <span>= Monto
+                                <input name="cant8" type="text" id="cant8" value="" size="5">
+                                </span>
+                            </li>
+                            <li>
+                                <span>= Income *
+                                <label>
+                                <input name="porc3" type="text" id="porc3" value="" size="5"> %
+                                </label>
+                                </span>
+                            </li>
+                        </ul>
                     </div>
                     <div>
                 </div>
@@ -284,13 +305,66 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Income US$</label>
                 <div class="col-lg-10 nopadding">                        
-                    <div class="col-sm-5">
-                        <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
-                            <option value="">no records.</option>
+                    <div class="col-md-3">
+                        <select name="incom" id="incom" class="form-control col-lg-5"   onChange="showItemInputsInsideUsComision();">
+                            <option value="-------------">-------------</option>
+                            <option value="1">Cantidad</option>
+                            <option value="3">Cantidad 2</option>
+                            <option value="4">Cantidad3</option>
+                            <option value="5">Monto</option>
+                            <option value="2">Porcentaje</option>
                         </select>
+                    </div>
+                    <div class="col-md-7">
+                        <ul id="insideus-comision-extra">
+                            <li>
+                                <span>
+                                = Qty *
+                                <label>
+                                <input name="cant9" type="text" id="cant9" value="" size="5">
+                                </label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="">
+                                = Q'ty *
+                                <label>
+                                <input name="cant10" type="text" id="cant10" value="" size="5">
+                                + Q'ty *
+                                <input name="cant11" type="text" id="cant11" value="" size="5">
+                                </label>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="">
+                                = Q'ty *
+                                <input name="cant12" type="text" id="cant12" value="" size="5">
+                                + Q'ty *
+                                <input name="cant13" type="text" id="cant13" value="" size="5">
+                                + Q'ty *
+                                <input name="cant14" type="text" id="cant14" value="" size="5">
+                                </span>
+                            </li>
+                            <li>
+                                <span class="">
+                                = Monto
+                                <input name="cant15" type="text" id="cant15" value="" size="5">
+                                </span>
+                            </li>
+                            <li>
+                                <span class="">
+                                = Amount *
+                                <label>
+                                <input name="porc2" type="text" id="porc2" value="" size="5"> %
+                                </label>
+                                </span>
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
             </div>
+            
             
             <!-- Total Amount US$ -->
             <div class="form-group">
@@ -435,7 +509,36 @@
         
     }
     
-
+    function showItemInputsInsideComision(dom) {
+        var e = document.getElementById("insid") ;
+        var strUser = e.options[e.selectedIndex].value;
+        $( "#inside-comision-extra li" ).css('display', 'none');
+        if (strUser == 2) {
+            $( "#inside-comision-extra li:nth-child(1)" ).css('display', 'block')
+        } else if(strUser == 3) {
+             $( "#inside-comision-extra li:nth-child(2)" ).css('display', 'block')
+        } else if (strUser == 1) {
+            $( "#inside-comision-extra li:nth-child(3)" ).css('display', 'block')
+        }         
+    }
+    
+    function showItemInputsInsideUsComision(dom) {
+        var e = document.getElementById("incom") ;
+        var strUser = e.options[e.selectedIndex].value;
+        
+        $( "#insideus-comision-extra li" ).css('display', 'none');
+        if (strUser == 1) {
+            $( "#insideus-comision-extra li:nth-child(1)" ).css('display', 'block')
+        } else if(strUser == 3) {
+             $( "#insideus-comision-extra li:nth-child(2)" ).css('display', 'block')
+        } else if (strUser == 4) {
+            $( "#insideus-comision-extra li:nth-child(3)" ).css('display', 'block')
+        } else if (strUser == 5) {
+            $( "#insideus-comision-extra li:nth-child(4)" ).css('display', 'block')
+        } else if (strUser == 2) {
+            $( "#insideus-comision-extra li:nth-child(5)" ).css('display', 'block')
+        }      
+    }
             
 
 

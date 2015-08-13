@@ -19,6 +19,12 @@
             <div class="row">
                 <?php echo $content_for_layout; ?> 
             </div>
+            <div  class="row" style="height: 250px">
+                <div col-md-12 class="text-center">
+                    2000-2015
+                </div>
+                
+            </div>
         </div>
 
 
@@ -49,10 +55,7 @@
         <div class="modal fade" id="mContForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
         </div>
-        <script src="http://localhost/acopitan/omar/intranet2015/src/js/bootstrap.js"></script>
-        <script src="http://localhost/acopitan/omar/intranet2015/src/js/bootstrap-datepicker.js"></script>
-        <script src="http://localhost/acopitan/omar/intranet2015/src/js/number.js"></script>
-
+        <?php require_once 'layout-partial/require_js.php';?>
     </body>
 </html>
 

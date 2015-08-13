@@ -30,3 +30,14 @@
     font-size: 12px;
     font-weight: 500;
 }
+
+/* view */
+.comision-1, .comision-2, .comision-3, .comision-4 {
+    display: none;
+}
+#inside-comision-extra li {
+    display: none;
+}
+#insideus-comision-extra  li{
+    display: none;
+}
