@@ -17,7 +17,7 @@
             <div class="col-md-4">
                 <div class="form-group form-group-black">
                     <label for="po_number">P/O Number :</label>
-                    <input type="text" class="form-control" id="po_number">
+                    <input type="text"  class="form-control" id="po_number">
                 </div>
             </div>
             <div class="col-md-4">
@@ -56,7 +56,7 @@
 
         <div class="row">
             <div class="col-sm-6 text-right">
-                <input class="btn btn-primary" type="button" onclick="browse('C01751')" value="Add" />
+                <input class="btn btn-primary" type="button" onclick="showProveedor(this)" value="Add" />
             </div>
             <div class="col-sm-6 text-left">
                 <input class="btn btn-primary" name="Submit2432" type="button" onclick="location.href = '<?php echo site_url('/allocation/index?anio=' . $anio) ?>';" value="Return">
@@ -68,7 +68,7 @@
 
     <div class="row red">
 
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" id="formProveedor" name="formProveedor" style="display: none">
             <!-- QTY -->
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Q'TY (MT / UNITS):</label>
@@ -88,14 +88,14 @@
             </div>
             <!-- SUPPLIER -->
             <div class="form-group">
-                <label for="id_empleado" class="col-lg-2 control-label">Supplier</label>
+                <label for="id_proveedor" class="col-lg-2 control-label">Supplier</label>
                 <div class="col-lg-10 nopadding_">
                     <div class="row">
                         <div class="col-sm-5">
-                            <select name="id_empleado" id="supplier" class="form-control col-lg-5">
+                            <select name="id_proveedor" id="id_proveedor" class="form-control col-lg-5" onchange="onSupplier()">
                                 <?php if (count($empleados) > 0): ?>
                                     <?php foreach ($empleados as $key => $value): ?>
-                                    <option value="<?php echo $value['id_empleado'] ?>"><?php echo $value['nombre'] ?></option>
+                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['nombres'] ?></option>
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <option>no records.</option>
@@ -181,9 +181,61 @@
                 <label for="qty" class="col-lg-2 control-label">Partner Comm</label>
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">
-                        <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
-                            <option value="">no records.</option>
+                        <select name="partner_comision" id="partner_comision" class="form-control col-lg-5"   
+                                onChange="showItemInputsComision(this);">
+                              <option>-------------</option>
+                              <option value="1">Cantidad</option>
+                              <option value="3">Cantidad 2</option>
+                              <option value="4">Cantidad3</option>
+                              <option value="5">Monto</option>
+                              <option value="2">Porcentaje</option>
                         </select>
+                    </div>
+                    <div class="col-md-5">
+                        <div>
+                            <ul id="comision-extra">
+                                <li class="comision-1"><!-- cantidad -->
+                                    <span>
+                                    = Qty *<input name="cant1" type="text" id="cant1" value="" size="5">
+                                    </span>
+                                </li>
+                                <li class="comision-2"><!-- cantidad 2 -->
+                                    <span>
+                                        = Q'ty *
+                                        <label>
+                                        <input name="cant2" type="text" id="cant2" value="" size="5">
+                                        + Q'ty *
+                                        <input name="cant3" type="text" class="Estilo43" id="cant3" value="" size="24">
+                                        </label>
+                                    </span>
+                                </li>
+                                <li class="comision-3"><!-- cantidad 3 -->
+                                    <span>
+                                        = Q'ty *
+                                        <input name="cant4" type="text" id="cant4" value="" size="5">
+                                        + Q'ty *
+                                        <input name="cant5" type="text" id="cant5" value="" size="5">
+                                        + Q'ty *                          
+                                        <input name="cant6" type="text" id="cant6" value="" size="5">
+                                    </span>
+                                </li>
+                                <li class="comision-4"><!-- monto -->
+                                    <span>
+                                    = Monto
+                                    <input name="cant7" type="text" id="cant7" value="" size="5">
+                                    </span>
+                                </li>
+                                <li  class="comision-4"><!-- Amount -->
+                                    <span>
+                                    = Amount *
+                                    <label>
+                                    <input name="porc1" type="text" id="porc1" value="" size="5">%
+                                    </label></span>
+                                </li>
+                            </ul>
+                                                      
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -213,11 +265,37 @@
             <!--  Inside Comm -->
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Inside Comm</label>
-                <div class="col-lg-10 nopadding">                        
-                    <div class="col-sm-5">
-                        <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
-                            <option value="">no records.</option>
+                <div class="col-md-10 nopadding">                        
+                    <div class="col-md-5">
+                        <select name="insid" class="form-control col-md-5" id="insid" onchange="showItemInputsInsideComision();">
+                            <option>-------------</option>
+                            <option value="2">Cantidad</option>
+                            <option value="3">Monto</option>
+                            <option value="1">Porcentaje</option>
                         </select>
+                    </div>    
+                    </div class="col-md-5">
+                    <ul id="inside-extra">
+                        <li>
+                            <span>= Q'ty *
+                            <input name="cant16" type="text" value="" size="5">
+                            </span>
+                        </li>
+                        <li>
+                            <span>= Monto
+                            <input name="cant8" type="text" id="cant8" value="" size="5">
+                            </span>
+                        </li>
+                        <li>
+                            <span>= Income *
+                            <label>
+                            <input name="porc3" type="text" id="porc3" value="" size="5"> %
+                            </label>
+                            </span>
+                        </li>
+                    </ul>
+                    <div>
+                        
                     </div>
                 </div>
             </div>
@@ -276,7 +354,7 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">ETD</label>
                 <div class="col-sm-3">                        
-                    <input type="text" class="form-control"/>
+                    <input type="text" name="etd" id="etd" class="form-control"/>
                 </div>
             </div>
             
@@ -284,7 +362,7 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">ETA</label>
                 <div class="col-sm-3">                        
-                    <input type="text" class="form-control"/>
+                    <input type="text" name="eta" id="eta" class="form-control"/>
                 </div>
             </div>
             
@@ -323,32 +401,81 @@
             
             
         </form>     
-
-
-
-
-
-
     </div>
+</div>
 
+<script type="text/javascript">
+    function showProveedor(dom) {
+        dom.parentElement
+            .parentElement
+            .parentElement
+            .style.display = 'none';
 
-
-    <script>
-        $(document).ready(function () {
-            $('#addCountry').click(function (event) {
-                event.preventDefault();
-                $.get('<?php echo site_url('country/create'); ?>', function (data) {
-                    $('#mContForm').html(data);
-                });
-            });
-
-            $('input[name=detectchange]').change(function (event) {
-                if ($(this).is(':checked')) {
-                    $('input[name=credito]').val('1');
-                } else {
-                    $('input[name=credito]').val('0');
+        document.formProveedor.style.display = 'block';
+    }
+    
+    function onSupplier() {
+        var id_proveedor = $('#id_proveedor').val();
+        $.ajax({
+                type: "GET",
+                url: "<?php echo site_url('/allocation/json_producto_por_proveedor') ?>",
+                data: { 'id_proveedor': id_proveedor},
+                success: function(data){
+                    console.log(data)
+                    var select = $('#id_producto').empty();
+                    $.each(data, function(i,item) {
+                        select.append( '<option value="'
+                                             + item.id
+                                             + '">'
+                                             + item.name
+                                             + '</option>' );
+                    });
                 }
-                ;
             });
-        });
-    </script>
+           
+    }
+    
+    function showItemInputsComision(dom) {
+        var e = document.getElementById("partner_comision") ;
+        var strUser = e.options[e.selectedIndex].value;
+        $( "#comision-extra li" ).css('display', 'none');
+        if (strUser == 1) {
+            $( "#comision-extra li:nth-child(1)" ).css('display', 'block')
+        } else if(strUser == 2) {
+             $( "#comision-extra li:nth-child(2)" ).css('display', 'block')
+        } else if (strUser == 3) {
+            $( "#comision-extra li:nth-child(3)" ).css('display', 'block')
+        } else if (strUser == 4) {
+            $( "#comision-extra li:nth-child(4)" ).css('display', 'block')
+        }else if(strUser == 5){
+            $( "#comision-extra li:nth-child(5)" ).css('display', 'block')
+        }else if(strUser == 6){
+            $( "#comision-extra li:nth-child(6)" ).css('display', 'block')
+        }
+        
+    }
+    
+    function showItemInputsInsideComision(dom) {
+        var e = document.getElementById("insid") ;
+        var strUser = e.options[e.selectedIndex].value;
+        $( "#inside-extra li" ).css('display', 'none');
+        if (strUser == 1) {
+            $( "#inside-extra li:nth-child(1)" ).css('display', 'block')
+        } else if(strUser == 2) {
+             $( "#inside-extra li:nth-child(2)" ).css('display', 'block')
+        } else if (strUser == 1) {
+            $( "#inside-extra li:nth-child(3)" ).css('display', 'block')
+        } 
+        
+    }
+    
+
+            
+
+
+    
+    $(document).ready(function(){
+       
+
+    });
+</script>
