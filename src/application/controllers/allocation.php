@@ -3,7 +3,7 @@
 $file = FCPATH."application/core/MY_ControllerAdmin.php"; (is_file($file)) ? include($file) : die("error: {$file}");
 
 class Allocation extends MY_ControllerAdmin {
-
+    
     public function __construct()
     {
         parent::__construct();
@@ -57,8 +57,10 @@ class Allocation extends MY_ControllerAdmin {
             $data['clientes'] = $this->buyer_model->getlistcliente();
             $data['products'] = array();
             //$this->colocacion_model->get_list_anio_detalle_colocaciones($id_colocaciones,$myinside);
-            $data['partners'] = $this->colocacion_model->get_partner(array(),100);
+            $data['partners'] = $this->colocacion_model->get_partner(array(), MY_ControllerAdmin::LIMIT_100);
             $data['empleados'] = $this->supplier_model->getList();
+            $data['incoterms'] = $this->colocacion_model->get_incoterms(array(), MY_ControllerAdmin::LIMIT_100);
+            $data['payments'] = $this->colocacion_model->get_payment(array(), MY_ControllerAdmin::LIMIT_100);
             
             $data['anio'] = date('Y');
      

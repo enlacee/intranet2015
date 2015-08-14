@@ -10,11 +10,15 @@ class Colocacion_Model extends CI_Model {
 
     private $table;
     private $tablePartner;
+    private $tableIncoterms;
+    private $tablePayments;
 
     public function __construct() {
         parent::__construct();
         $this->table = 'colocaciones';
         $this->tablePartner = 'partner';
+        $this->tableIncoterms = 'incoterms';
+        $this->tablePayments = 'payment';
     }
 
     public function getAnioAllocations($anio, $inside = null) {
@@ -96,7 +100,69 @@ class Colocacion_Model extends CI_Model {
         }
        
         return $rs;
-    }  
+    }
+    
+    /**
+     * 
+     * @param type $dataExtra
+     * @param type $limit
+     * @param type $offset
+     * @param type $rows
+     * @return type
+     */
+    public function get_incoterms($dataExtra = array(), $limit = '', $offset = '', $rows = false) {
+            
+        $this->db->select();
+        $this->db->from($this->tableIncoterms);
+
+        // -------- init
+        if (!empty($limit) && !empty ($offset)) {
+            $this->db->limit($limit, $offset);
+        } elseif (!empty($limit)) {
+            $this->db->limit($limit);
+        }
+        $this->db->order_by('nombre asc'); 
+
+        $query = $this->db->get();
+        if ($rows == true) {
+            $rs = $query->num_rows();
+        } else {
+           $rs = $query->result_array(); 
+        }
+       
+        return $rs;
+    }
+    
+    /**
+     *  payment temrs
+     * @param type $dataExtra
+     * @param type $limit
+     * @param type $offset
+     * @param type $rows
+     * @return type
+     */
+    public function get_payment($dataExtra = array(), $limit = '', $offset = '', $rows = false){
+        
+        $this->db->select();
+        $this->db->from($this->tablePayments);
+
+        // -------- init
+        if (!empty($limit) && !empty ($offset)) {
+            $this->db->limit($limit, $offset);
+        } elseif (!empty($limit)) {
+            $this->db->limit($limit);
+        }
+        $this->db->order_by('payment asc'); 
+
+        $query = $this->db->get();
+        if ($rows == true) {
+            $rs = $query->num_rows();
+        } else {
+           $rs = $query->result_array(); 
+        }
+       
+        return $rs;
+    }
     
 
 }

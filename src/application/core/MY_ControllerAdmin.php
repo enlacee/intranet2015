@@ -4,6 +4,7 @@ class MY_ControllerAdmin extends CI_Controller {
 
     // paginator
     const LIMIT = 5;
+    const LIMIT_100 = 100;
     const PERFIL_1 = 'p01';
     const PERFIL_2 = 'p02';
     const PERFIL_3 = 'p03';

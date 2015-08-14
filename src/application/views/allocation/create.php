@@ -94,13 +94,13 @@
                         <div class="col-sm-5">
                             <select name="id_proveedor" id="id_proveedor" class="form-control col-lg-5" onchange="onSupplier()">
                                 <?php if (count($empleados) > 0): ?>
-                                    <?php foreach ($empleados as $key => $value): ?>
+                                    <option value="">-</option>
+                                <?php foreach ($empleados as $key => $value): ?>
                                     <option value="<?php echo $value['id'] ?>"><?php echo $value['nombres'] ?></option>
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <option>no records.</option>
                                 <?php endif;?>
-                                <option>-------------</option>
                             </select>
                         </div>
                         <div class="col-sm-5">
@@ -143,7 +143,7 @@
                     <div class="col-sm-5">
                         
                         <select name="id_producto" class="form-control col-lg-5" id="id_producto" >
-                            <option value="-------------">-------------</option>
+                            <option value="">-</option>
                         </select>
                     </div>
                     <div class="col-sm-5">
@@ -160,6 +160,7 @@
                     <div class="col-sm-5">
                         <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
                             <?php if (count($partners) > 0): ?>
+                                <option value="">-</option>
                                 <?php foreach ($partners as $key => $value): ?>
                                 <option value="<?php echo $value['partner'] ?>"><?php echo $value['nombre'] ?></option>
                                 <?php endforeach; ?>
@@ -180,10 +181,10 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Partner Comm</label>
                 <div class="col-lg-10 nopadding">                        
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <select name="partner_comision" id="partner_comision" class="form-control col-lg-5"   
                                 onChange="showItemInputsComision(this);">
-                              <option>-------------</option>
+                              <option value="">-</option>
                               <option value="1">Cantidad</option>
                               <option value="3">Cantidad 2</option>
                               <option value="4">Cantidad3</option>
@@ -191,7 +192,7 @@
                               <option value="2">Porcentaje</option>
                         </select>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-sm-8">
                         <div>
                             <ul id="comision-extra">
                                 <li class="comision-1"><!-- cantidad -->
@@ -248,7 +249,8 @@
                     <div class="col-sm-5">
                         <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
                             <?php if (count($partners) > 0): ?>
-                                <?php foreach ($partners as $key => $value): ?>
+                                <option value="">-</option>
+                            <?php foreach ($partners as $key => $value): ?>
                                 <option value="<?php echo $value['partner'] ?>"><?php echo $value['nombre'] ?></option>
                                 <?php endforeach; ?>
                             <?php else: ?>
@@ -268,7 +270,7 @@
                 <div class="col-md-10 nopadding">                        
                     <div class="col-md-3">
                         <select name="insid" class="form-control col-md-5" id="insid" onchange="showItemInputsInsideComision();">
-                              <option>-------------</option>
+                              <option value="">-</option>
                               <option value="2">Cantidad</option>
                               <option value="3">Monto</option>
                               <option value="1">Porcentaje</option>
@@ -307,7 +309,7 @@
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-md-3">
                         <select name="incom" id="incom" class="form-control col-lg-5"   onChange="showItemInputsInsideUsComision();">
-                            <option value="-------------">-------------</option>
+                            <option value="">-</option>
                             <option value="1">Cantidad</option>
                             <option value="3">Cantidad 2</option>
                             <option value="4">Cantidad3</option>
@@ -380,7 +382,14 @@
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">
                         <select name="partner" id="partner" class="form-control col-lg-5" onChange="ver();">
-                            <option value="">no records.</option>
+                            <?php if (count($incoterms) > 0): ?>
+                                <option value="">-</option>
+                            <?php foreach ($incoterms as $key => $value): ?>
+                                <option value="<?php echo $key ?>"><?php echo $value['nombre']?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="">no records.</option>
+                            <?php endif;?>
                         </select>
                     </div>
                     <div class="col-sm-5">
@@ -395,7 +404,14 @@
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">
                         <select name="partner" id="partner" class="form-control col-lg-5" onChange="ver();">
-                            <option value="">no records.</option>
+                            <?php if (count($payments) > 0): ?>
+                                <option value="">-</option>
+                            <?php foreach ($payments as $key => $value): ?>
+                                <option value="<?php echo $key ?>"><?php echo $value['payment'] ?></option>
+                            <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="">no records.</option>
+                            <?php endif;?>
                         </select>
                     </div>
                     <div class="col-sm-5">
