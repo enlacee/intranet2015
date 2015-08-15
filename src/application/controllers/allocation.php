@@ -131,7 +131,22 @@ EOD;
             header('Content-Type: application/json');
             echo json_encode($data);
         }
-
+    }
+    
+    /**
+     * 
+     */
+    public function modal_supplier()
+    {
+        //var_dump($this->input->post()); exit;
+        if ($this->input->post()) {
+            $this->load->model('country_model');
+            echo $this->country_model->create();            
+        } else {
+            $this->load->model('country_model');
+            $data['listcountry'] = $this->country_model->all();
+            $this->load->view('country/country_create_view', $data);
+        }  
         
     }
     

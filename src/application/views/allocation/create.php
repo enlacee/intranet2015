@@ -180,8 +180,8 @@
             <!-- Partner Comm -->
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Partner Comm</label>
-                <div class="col-lg-10 nopadding">                        
-                    <div class="col-sm-4">
+                <div class="col-md-10 nopadding">                        
+                    <div class="col-md-3">
                         <select name="partner_comision" id="partner_comision" class="form-control col-lg-5"   
                                 onChange="showItemInputsComision(this);">
                               <option value="">-</option>
@@ -555,12 +555,11 @@
             $( "#insideus-comision-extra li:nth-child(5)" ).css('display', 'block')
         }      
     }
-            
 
-
-    
     $(document).ready(function(){
        
 
     });
 </script>
+
+<?php require_once 'modal/modal.php' ?>
