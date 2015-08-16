@@ -80,6 +80,8 @@ EOD;
         
         $this->loadStatic(array("jstring" => $str));
         $this->loadStatic(array('js' => 'js/jquery.validate.min.js'));
+        $this->loadStatic(array('js' => 'js/localization/messages_es.min.js'));
+        
     }
 
     public function edit()

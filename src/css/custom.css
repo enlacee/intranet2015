@@ -41,3 +41,9 @@
 #insideus-comision-extra  li{
     display: none;
 }
+label.error {
+    color: #F00 !important;
+	margin:2px 0 0 2px;
+	font-size:12px;
+    font-weight: 100;
+}

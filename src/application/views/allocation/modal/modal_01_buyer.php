@@ -1,4 +1,4 @@
-<!-- Mensaje de Confirmacion para eliminar Country -->
+btn btn-primary comSeparator<!-- Mensaje de Confirmacion -->
 <div class="cont-mensaje">
     <div class="mensaje">
         <div class="header-mensaje">
@@ -17,7 +17,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Add New Buyer</h4>
         </div>
-        <form id="form" name="form" method="POST" action="">
+        <form id="form-buyer" name="form" method="POST" action="">
             <div class="modal-body">      
 
                 <div class="table-responsive" style="height: 450px; padding: 0 15px 0 0;">
@@ -58,13 +58,12 @@
                                                 <option value="<?php echo $country->id; ?>"><?php echo $country->name ?></option>
                                             <?php endforeach; ?>
                                         <?php else: ?>
-                                        
+                                            <option value="">no found</option>
                                         <?php endif;?>
-                                        <option value="">no found.</option>
                                     </select>
                                 </div>     
                                 <div class="col-md-3">
-                                    <a href="#" id="addCountry" class="btn btn-info" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#mContForm" data-backdrop="static">Add</a>
+                                    <a href="#" id="addCountry" class="btn btn-primary" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#mContForm" data-backdrop="static">Add</a>
                                 </div>     
                             </div>
                         </div>      
@@ -79,7 +78,7 @@
 
                         
                         <input type="submit" class="btn btn-primary comSeparator" value="Save">
-                        <a href="#" class="btn btn-success">Return</a>
+                        <button class="btn btn-success" data-dismiss="modal">Return</button>
                     </form>
                     <!--fin-->
 
@@ -90,8 +89,7 @@
 </div>
 <script>
     $(document).ready(function(){
-        console.log("hi");
-        $('#form').validate();
+        $('#form-buyer').validate();
 
     });
 </script>

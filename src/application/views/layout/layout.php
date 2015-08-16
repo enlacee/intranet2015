@@ -55,7 +55,6 @@
         <div class="modal fade" id="mContForm2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
         </div>
-        anibal
         <?php require_once 'layout-partial/require_js.php';?>
     </body>
 </html>
