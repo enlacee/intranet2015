@@ -25,22 +25,20 @@
 
 
 <div class="modal fade in" id="mContForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"><!-- Mensaje de Confirmacion para eliminar Country -->
-    <div class="modal-header">
+    <div class="modal-header_">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
         <h4 class="modal-title" id="myModalLabel">Add New Buyer</h4>
     </div>
 
-    <div class="cont-mensaje">
+    <div class="cont-mensaje cont-mensaje-111">
         <div class="mensaje">
-            <div class="header-mensaje">
-                <h4>Confirmar Eliminación</h4>
-            </div>
-            <div class="body-mensaje">
-                <button id="delSi" class="btn btn-danger">Si</button>
-                <button id="delNo" class="btn btn-primary">No</button>
-            </div>    
+HELLO  
         </div>
+        
+        
     </div>
+    
+    
     <!-- Fin Mensaje de Confirmacion para eliminar Country -->
     <!-- Modal Personalizado -->
     <div class="porModal" style="display: block;">
@@ -62,18 +60,26 @@
                         <tbody>                                           
                             <tr>
                                 <td>uk</td>                                                                      
-                                <td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="17"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                                <td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="17">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                </td>
                             </tr>                       
                             <tr>
                                 <td>uk</td>                                                                      
-                                <td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="38"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                                <td style="text-align: center;">
+                                    <a href="delete" class="btn btn-danger del-Country" data-id="38">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </a>
+                                </td>
                             </tr>                       
 
                         </tbody></table>
                 </div>          
                 <div class="modalPPie">          
-                    <input type="submit" class="btn btn-primary" value="Save">                
-                    <button id="bCerrarMS" class="btn btn-default">Return</button>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Return</button>
+
                 </div>
             </form>
         </div>
@@ -81,8 +87,10 @@
     <!-- Fin Modal Personalizado -->
 
 
-    <script>
-        $(document).ready(function() {
+</div>
+
+<script>
+ $(document).ready(function() {
             $('#mModalSup').click(function(event) {
                 event.preventDefault();
                 $('div.porModal').fadeIn('500');
@@ -125,9 +133,8 @@
 
             $('#tableCountry').on('click', 'a.del-Country', function(event) {
                 event.preventDefault();
-                idCountry = $(this).data('id');
-                nFila = $(this).parent().parent().index();
-                $('.cont-mensaje').fadeIn('500');
+
+                $('.cont-mensaje-111').fadeIn('500');
             });
 
             $('#delNo').click(function(event) {
@@ -149,4 +156,4 @@
             });
             // Fin del Mensaje de confirmación
         });
-    </script></div>
+</script>
