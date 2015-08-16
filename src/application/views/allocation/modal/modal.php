@@ -1,9 +1,6 @@
 <!-- MODAL 01 -->
-
 <!-- Trigger the modal with a button 
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
-
-<!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -26,8 +23,6 @@
 
 
 <!-- MODAL 02 -->
-
-
 <!-- Mensaje de Confirmacion -->
 <div class="cont-mensaje cont-mensaje-1">
     <div class="mensaje">
@@ -35,14 +30,13 @@
             <h4>Confirmar Eliminación</h4>
         </div>
         <div class="body-mensaje">
-            <button id="delSi_" class="btn btn-danger">Si</button>
-            <button id="delNo_" class="btn btn-primary my-modal-btn-no">No</button>
+            <button id="delSi" class="btn btn-danger">Si</button>
+            <button id="delNo" class="btn btn-primary">No</button>
         </div>  
     </div>
 </div>
 
 <div class="modal fade in" id="mContForm" role="dialog" aria-hidden="false">
-
     <!-- Modal Personalizado -->
     <div class="porModal" style="display: block;">
         <div class="cont-modalP">
@@ -59,7 +53,8 @@
                         <thead class="texto-centrado fontB">
                             <tr><td>Name</td>                      
                                 <td>Actión</td>
-                            </tr></thead>
+                            </tr>
+                        </thead>
                         <tbody>                                           
                             <tr>
                                 <td>uk</td>                                                                      
@@ -69,7 +64,8 @@
                                 </td>
                             </tr>
 
-                        </tbody></table>
+                        </tbody>
+                    </table>
                 </div>          
                 <div class="modalPPie">          
                     <input type="submit" class="btn btn-primary" value="Save">
@@ -78,7 +74,6 @@
             </form>
         </div>
     </div>
-
 </div>
 
 <script>
@@ -99,25 +94,8 @@
                     cFila += '<td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="' + data + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
                     $('#tableCountry tr:last').after(cFila);
                     $('#mContForm').modal('toggle');
-                    
-                    
                 });
-            }
-            ;
-        });
-
-        $('#bCerrarMS').click(function(event) {
-            event.preventDefault();
-            $('div.porModal').fadeOut('500');
-        });
-
-        $('input[name=detectchange]').change(function(event) {
-            if ($(this).is(':checked')) {
-                $('input[name=credito]').val('1');
-            } else {
-                $('input[name=credito]').val('0');
-            }
-            ;
+            };
         });
 
         // Mensaje de confirmacion
@@ -129,11 +107,12 @@
             $('.cont-mensaje-1').fadeIn('500');
         });
 
-
-
         $('#delSi').click(function(event) {
             event.preventDefault();
-            $.post('http://localhost/acopitan/omar/intranet2015/src/index.php/country/delete', {id: idCountry}, function(data) {
+            var URL = '<?php echo base_url() ?>';
+                URL+= 'country/delete';
+            var dataPost = {id: idCountry};                
+            $.post(URL, dataPost, function(data) {
                 if (data > 0) {
                     $('#tableCountry tbody tr:eq(' + nFila + ')').remove();
                     $('#sltCountry option[value=' + idCountry + ']').remove();
@@ -145,10 +124,9 @@
         });
         // Fin del Mensaje de confirmación
 
-
-        $('.my-modal-btn-no').click(function(event) {
+        $('#delNo').click(function(event) {
             event.preventDefault();
-            $(this).parent().parent().parent().fadeOut()
+            $('.cont-mensaje').fadeOut('500');
         });
 
     });
