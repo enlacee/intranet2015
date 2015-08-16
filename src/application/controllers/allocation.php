@@ -77,8 +77,9 @@ class Allocation extends MY_ControllerAdmin {
             $("#eta").datepicker({ dateFormat: 'dd-mm-yy' });
         });
 EOD;
-
-        $this->loadStatic(array("jstring" => $str));        
+        
+        $this->loadStatic(array("jstring" => $str));
+        $this->loadStatic(array('js' => 'js/jquery.validate.min.js'));
     }
 
     public function edit()
@@ -134,20 +135,35 @@ EOD;
     }
     
     /**
-     * 
+     * show modal reusefull
      */
-    public function modal_supplier()
+    public function modal_general()
     {
-        //var_dump($this->input->post()); exit;
-        if ($this->input->post()) {
-            $this->load->model('country_model');
-            echo $this->country_model->create();            
-        } else {
-            $this->load->model('country_model');
-            $data['listcountry'] = $this->country_model->all();
-            $this->load->view('country/country_create_view', $data);
-        }  
+        $idForm = $this->input->post('id');
+        $view = false;
         
+        if ($idForm == 1) {
+            //$this->load->view('buyer/buyer_create_view.php');
+            $this->load->model('country_model');            
+            $data['list_country'] = $this->country_model->all();
+            $this->load->model('supplier_model');
+            $data['listcredit'] = $this->supplier_model->all_credit();
+            $this->load->view('allocation/modal/modal_01_buyer.php', $data);
+            
+        } else if($idForm == 2) {
+            $this->load->view('allocation/modal/modal_02_supplier.php');
+        } elseif($idForm == 3) {
+            
+        }
+        
+        return $view;
     }
+    
+    private function modal_buyer()
+    {
+         
+    }
+    
+    
     
 }

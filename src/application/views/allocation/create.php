@@ -31,7 +31,10 @@
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
-                    <input type="boton" name="Submit243" class="form-control btn btn-primary Estilo43" onclick="javascript:browse2()" value="Add  Buyer">
+                    <input type="boton" name="Submit243" class="form-control btn btn-primary Estilo43" 
+                           onclick="javascript:loadForm(this)" value="Add  Buyer"
+                        data-url-id="1">
+                    
                 </div>
             </div>
         </form>
@@ -104,7 +107,8 @@
                             </select>
                         </div>
                         <div class="col-sm-5">
-                            <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:browse1()" value="New">
+                            <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:loadForm(this)" value="New"
+                                   data-url-id="2">
                         </div>
                     </div>
 
@@ -559,7 +563,23 @@
     $(document).ready(function(){
        
 
+
     });
+    
+    
+    function loadForm(dom) {
+        var url = '<?php echo site_url('allocation/modal_general') ?>';
+        var id = dom.getAttribute('data-url-id'); 
+       
+        var dataPost = {id : id};
+        $.post(url, dataPost)
+          .done(function( data ) {
+            $('#myModal').children().html(data);
+            $('#myModal').modal();
+        });
+        
+    }
+    
 </script>
 
 <?php require_once 'modal/modal.php' ?>

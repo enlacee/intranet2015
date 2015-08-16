@@ -96,6 +96,7 @@ class MY_ControllerAdmin extends CI_Controller {
                 }
             }
         }
+        
         //$this->load->get_var($key)
         $this->load->vars($this->dataView);
         return $this->dataView;

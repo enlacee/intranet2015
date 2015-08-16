@@ -41,4 +41,4 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 /* Location: ./application/config/constants.php */
 
 define('TITLE', '.:: Zaimar Group ::.');
-define('PUBLIC_URL', '/public');
+define('PUBLIC_URL', '');

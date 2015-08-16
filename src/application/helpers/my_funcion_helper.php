@@ -4,7 +4,7 @@ if(!function_exists('getPublicUrl'))
 {
     //formateamos la fecha y la hora, función de cesarcancino.com
     function getPublicUrl()
-    {        
-        return base_url(PUBLIC_URL);
+    {   
+            return base_url(PUBLIC_URL);
+        }
     }
-}
