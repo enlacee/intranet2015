@@ -32,9 +32,11 @@ class Allocation extends MY_ControllerAdmin {
             $data['id_perfil'] = $this->input->get('id_perfil');
             
             // =============== code
-            $this->load->view('includes/header', $data);
+            /*$this->load->view('includes/header', $data);
             $this->load->view('allocation/list_view', $data);
             $this->load->view('includes/footer');
+            */
+            $this->layout->view('allocation/list_view.php', $data);
         } else {
             redirect(site_url('login/sinpermiso'));
         }
