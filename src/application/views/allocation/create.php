@@ -181,7 +181,8 @@
                         </select>
                     </div>
                     <div class="col-sm-5">
-                        <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:browse1()" value="New">
+                        <input type="button" name="Submit242"  class="btn btn-primary" 
+                            onclick="javascript:loadForm(this)" data-url-id="4" value="New">
                     </div>
 
                 </div>
@@ -270,7 +271,8 @@
                         </select>
                     </div>
                     <div class="col-sm-5">
-                        <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:browse1()" value="New">
+                        <input type="button" name="Submit242"  class="btn btn-primary" 
+                               onclick="javascript:loadForm(this)" data-url-id="5" value="New">
                     </div>
                 </div>
             </div>
@@ -404,7 +406,8 @@
                         </select>
                     </div>
                     <div class="col-sm-5">
-                        <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:browse1()" value="New">
+                        <input type="button" name="Submit242"  class="btn btn-primary" 
+                            onclick="javascript:loadForm(this)" data-url-id="6" value="New">
                     </div>
                 </div>
             </div>
@@ -426,7 +429,8 @@
                         </select>
                     </div>
                     <div class="col-sm-5">
-                        <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:browse1()" value="New">
+                        <input type="button" name="Submit242"  class="btn btn-primary"
+                            onclick="javascript:loadForm(this)" data-url-id="7" value="New">
                     </div>
                 </div>
             </div>

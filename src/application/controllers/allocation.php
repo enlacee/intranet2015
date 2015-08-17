@@ -176,6 +176,14 @@ EOD;
             $data['empleados'] = $this->supplier_model->getList();            
             $data['list_credit'] = $this->supplier_model->all_credit();
             $this->load->view('allocation/modal/modal_03_product.php', $data);
+        } elseif($idForm == 4) {
+            $this->load->view('allocation/modal/modal_04_partner.php', array());
+        } elseif($idForm == 5) {
+            $this->load->view('allocation/modal/modal_05_incoterms.php', array());
+        } elseif($idForm == 6) {
+            $this->load->view('allocation/modal/modal_06_inside_per.php', array());
+        } elseif($idForm == 7) {
+            $this->load->view('allocation/modal/modal_07_payment_term.php', array());
         }
         
         return $view;
