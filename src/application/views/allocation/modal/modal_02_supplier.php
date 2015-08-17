@@ -1,11 +1,10 @@
 <!-- MODAL 01 -->
 <div id="myModal" class="modal fade" role="dialog">
-
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add New Buyer</h4>
+                <h4 class="modal-title" id="myModalLabel">Add New Suppliers</h4>
             </div>
             <form id="form-buyer" name="form-buyer" method="POST" 
                   action="<?php echo base_url('buyer/create') ?>">
@@ -17,57 +16,53 @@
                         <!--inicio-->                    
                         <div class="form-group">
                             <label for="txtName">Name</label>
-                            <input type="text" name="namebuyer" class="form-control required" id="txtName" required="" maxlength="25" autofocus="">
+                            <input type="text" name="nombres" class="form-control" id="txtName" required maxlength="25" autofocus>
                         </div>      
                         <div class="form-group">
-                            <label for="txtRuc">RUC</label>
-                            <input type="text" name="ruc" class="form-control" id="txtRuc" maxlength="50">
+                            <label for="txtTelephone">Telephone</label>
+                            <input type="text" name="telefono" class="form-control" id="txtNTelephone" maxlength="15">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtCellular">Celular</label>
+                            <input type="text" name="celular" class="form-control" id="txtCellular" maxlength="15">
                         </div>
                         <div class="form-group">
                             <label for="txtAddress">Address</label>
-                            <input type="text" name="address" class="form-control" id="txtAddress" maxlength="50">
+                            <input type="text" name="direccion" class="form-control" id="txtAddress" maxlength="50">
                         </div>
-                        <div class="form-group">
-                            <label for="txtWeb">Web</label>
-                            <input type="text" name="web" class="form-control" id="txtWeb" maxlength="100">
-                        </div>
-                        <div class="form-group">
-                            <label for="txtFax">Fax</label>
-                            <input type="text" name="fax" class="form-control" id="txtFax" maxlength="15">
-                        </div>
-                        <div class="form-group">
-                            <label for="txtTelephone">Telephone</label>
-                            <input type="text" name="telephone" class="form-control" id="txtTelephone" maxlength="15">
-                        </div>      
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-9">
                                     <label for="selCountry">Country</label>
-                                    <select name="country" class="form-control" id="sltCountry" required="">
-                                        <option value="">-</option>
-                                        <?php if (count($list_country) > 0): ?>
-                                            <?php foreach ($list_country as $country): ?>
-                                                <option value="<?php echo $country->id; ?>"><?php echo $country->name ?></option>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <option value="">no found</option>
-                                        <?php endif; ?>
+                                    <select name="pais" class="form-control" id="sltCountry" required>
+                                        <option value="0">::No definido::</option>
+                                        <?php
+                                        if (count($list_country) > 0) {
+                                            foreach ($list_country as $country) {
+                                                ?>                  
+                                                <option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
                                     </select>
                                 </div>     
                                 <div class="col-md-3">
-                                    <a href="#" id="addCountry" class="btn btn-primary" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#mContForm" data-backdrop="static">Add</a>
+                                    <button id="addCountry" class="btn btn-info" style="margin-top: 26px; width: 100%; height: 39px" data-toggle="modal" data-target="#mContForm" data-backdrop="static">Add</button>
                                 </div>     
                             </div>
-                        </div>      
+                        </div>
                         <div class="form-group">
                             <label for="txtEmail">E-Mail</label>
                             <input type="email" name="email" class="form-control" id="txtEmail" maxlength="50">
-                        </div>
+                        </div>      
                         <div class="form-group">
-                            <label for="txtObs">Description</label>
-                            <textarea name="description" id="txtObs" class="form-control" rows="3" maxlength="250"></textarea>
+                            <label for="txtObs">Observers</label>
+                            <textarea name="observaciones" id="txtObs" class="form-control" rows="3" maxlength="250"></textarea>
                         </div>
 
+                        <input type="hidden" name="credito" value="0">
+                        <input type="hidden" name="estado" value="a">
                         <input type="submit" class="btn btn-primary comSeparator" value="Save">
                         <button class="btn btn-success" data-dismiss="modal">Return</button>
                         <!--fin-->
@@ -78,22 +73,8 @@
     </div>
 </div>
 
-
-<!-- MODAL 02 Buyer -->
-<!-- Mensaje de Confirmacion -->
-<div class="cont-mensaje-modal cont-mensaje-1">
-    <div class="mensaje">
-        <div class="header-mensaje">
-            <h4>Confirmar Eliminación</h4>
-        </div>
-        <div class="body-mensaje">
-            <button id="delSi" class="btn btn-danger">Si</button>
-            <button id="delNo" class="btn btn-primary">No</button>
-        </div>  
-    </div>
-</div>
-
-<div class="modal fade in" id="mContForm" role="dialog" aria-hidden="false">
+<!-- MODAL 02 -->
+<div class="modal fade in" id="myModal2" role="dialog" aria-hidden="false">
     <!-- Modal Personalizado -->
     <div class="porModal" style="display: block;">
         <div class="cont-modalP">
@@ -144,84 +125,8 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#myModal').modal('show');
-        // register items
-        $('#frmAddCountry').submit(function(event) {
-            event.preventDefault();
-            if ($.trim($('input[name=name]').val()) == '') {
-                $('input[name=name]').focus();
-            } else {
-                var URL = '<?php echo base_url() ?>';
-                URL += 'supplier/country_create';
-                var dataPost = {name: $('input[name=name]').val()}
-
-                $.post(URL, dataPost, function(data) {
-                    $('#sltCountry').append('<option value="' + data + '" selected>' + $('input[name=name]').val() + '</option>');
-                    cFila = "<tr><td>" + $('input[name=name]').val() + "</td>";
-                    cFila += '<td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="' + data + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
-                    $('#tableCountry tr:last').after(cFila);
-                    $('#mContForm').modal('toggle');
-                });
-            }
-            ;
-        });
-
-        // Mensaje de confirmacion
-        var idCountry = 0;
-        var nFila = 0;
-
-        $('#tableCountry').on('click', 'a.del-Country', function(event) {
-            event.preventDefault();
-            idCountry = $(this).data('id');
-            nFila = $(this).parent().parent().index();
-            $('.cont-mensaje-1').fadeIn('500');
-        });
-
-        $('#delSi').click(function(event) {
-            event.preventDefault();
-            var URL = '<?php echo base_url() ?>';
-            URL += 'country/delete';
-            var dataPost = {id: idCountry};
-            $.post(URL, dataPost, function(data) {
-                if (data > 0) {
-                    $('#tableCountry tbody tr:eq(' + nFila + ')').remove();
-                    $('#sltCountry option[value=' + idCountry + ']').remove();
-                    $('.cont-mensaje-1').fadeOut('500');
-                } else {
-                    $('.cont-mensaje-1').fadeOut('500');
-                }
-            });
-        });
-        // Fin del Mensaje de confirmación
-
-        $('#delNo').click(function(event) {
-            event.preventDefault();
-            $('.cont-mensaje-1').fadeOut('500');
-        });
-
-    });
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Mensaje de Confirmacion -->
-<!--<div class="cont-mensaje">
+<div class="cont-mensaje-modal cont-mensaje-1">
     <div class="mensaje">
         <div class="header-mensaje">
             <h4>Confirmar Eliminación</h4>
@@ -229,25 +134,14 @@
         <div class="body-mensaje">
             <button id="delSi" class="btn btn-danger">Si</button>
             <button id="delNo" class="btn btn-primary">No</button>
-        </div>    
+        </div>  
     </div>
-</div>-->
-<!-- Fin Mensaje de Confirmacion para eliminar Country -->
+</div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
-        var contact = $('#form-buyer');
-        $(contact).validate({
-            submitHandler: function(form) {
-                var URL = contact.attr('action');
-                $.post(URL, contact.serialize(), function(data) {
-                    if (data == true) {
-                        $('#myModal').modal('hide');
-                        window.location = "<?php echo base_url('/allocation/create') ?>";
-                    }
-                });
-            }
-        });
+        $('#myModal').modal('show');
 
     });
 </script>
+

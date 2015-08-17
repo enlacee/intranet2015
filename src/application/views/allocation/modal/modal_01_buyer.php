@@ -78,19 +78,6 @@
 </div>
 
 <!-- MODAL 02 -->
-<!-- Mensaje de Confirmacion -->
-<div class="cont-mensaje-modal cont-mensaje-1">
-    <div class="mensaje">
-        <div class="header-mensaje">
-            <h4>Confirmar Eliminación</h4>
-        </div>
-        <div class="body-mensaje">
-            <button id="delSi" class="btn btn-danger">Si</button>
-            <button id="delNo" class="btn btn-primary">No</button>
-        </div>  
-    </div>
-</div>
-
 <div class="modal fade in" id="myModal2" role="dialog" aria-hidden="false">
     <!-- Modal Personalizado -->
     <div class="porModal" style="display: block;">
@@ -139,6 +126,19 @@
                 </div>
             </form>
         </div>
+    </div>
+</div>
+
+<!-- Mensaje de Confirmacion -->
+<div class="cont-mensaje-modal cont-mensaje-1">
+    <div class="mensaje">
+        <div class="header-mensaje">
+            <h4>Confirmar Eliminación</h4>
+        </div>
+        <div class="body-mensaje">
+            <button id="delSi" class="btn btn-danger">Si</button>
+            <button id="delNo" class="btn btn-primary">No</button>
+        </div>  
     </div>
 </div>
 

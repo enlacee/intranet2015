@@ -155,7 +155,9 @@ EOD;
             $this->load->view('allocation/modal/modal_01_buyer.php', $data);
             
         } else if($idForm == 2) {
-            $this->load->view('allocation/modal/modal_02_supplier.php');
+            $this->load->model('country_model');            
+            $data['list_country'] = $this->country_model->all();
+            $this->load->view('allocation/modal/modal_02_supplier.php', $data);
         } elseif($idForm == 3) {
             
         }
