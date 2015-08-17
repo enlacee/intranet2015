@@ -22,9 +22,9 @@
 </div>
 
 
-<!-- MODAL 02 -->
+<!-- MODAL 02 Buyer -->
 <!-- Mensaje de Confirmacion -->
-<div class="cont-mensaje cont-mensaje-1">
+<div class="cont-mensaje-modal cont-mensaje-1">
     <div class="mensaje">
         <div class="header-mensaje">
             <h4>Confirmar Eliminación</h4>
@@ -48,24 +48,35 @@
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control required" id="name" name="name">
-                    </div>                     
-                    <table id="tableCountry" class="table table-bordered table-hover table-fondo">                  
+                    </div>
+                    <div class="table-responsive" style="height: 280px; padding: 0 15px 0 0;">
+                        <table id="tableCountry" class="table table-condensed table-bordered table-hover table-fondo">                  
                         <thead class="texto-centrado fontB">
                             <tr><td>Name</td>                      
                                 <td>Actión</td>
                             </tr>
                         </thead>
-                        <tbody>                                           
-                            <tr>
-                                <td>uk</td>                                                                      
-                                <td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="17">
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                    </a>
-                                </td>
-                            </tr>
-
+                        <tbody>
+                            <?php if (count($list_country)>0): ?>
+                                <?php foreach ($list_country as $country): ?>
+                                    <tr>
+                                        <td><?php echo $country->name ?></td>
+                                        <td>
+                                            <a href="delete" class="btn btn-danger del-Country" data-id="<?php echo $country->id; ?>">
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td>no found</td>
+                                    <td>-</td>
+                                </tr>
+                            <?php endif;?>
                         </tbody>
                     </table>
+                    </div>
                 </div>          
                 <div class="modalPPie">          
                     <input type="submit" class="btn btn-primary" value="Save">
@@ -76,7 +87,7 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         // register items
         $('#frmAddCountry').submit(function(event) {
@@ -100,11 +111,13 @@
 
         // Mensaje de confirmacion
         var idCountry = 0;
-        var nFila = 0;
+        var nFila = 0;   
 
         $('#tableCountry').on('click', 'a.del-Country', function(event) {
-            event.preventDefault();
-            $('.cont-mensaje-1').fadeIn('500');
+          event.preventDefault();
+          idCountry = $(this).data('id');
+          nFila = $(this).parent().parent().index();      
+          $('.cont-mensaje-1').fadeIn('500');
         });
 
         $('#delSi').click(function(event) {
@@ -116,9 +129,9 @@
                 if (data > 0) {
                     $('#tableCountry tbody tr:eq(' + nFila + ')').remove();
                     $('#sltCountry option[value=' + idCountry + ']').remove();
-                    $('.cont-mensaje').fadeOut('500');
+                    $('.cont-mensaje-1').fadeOut('500');
                 } else {
-                    $('.cont-mensaje').fadeOut('500');
+                    $('.cont-mensaje-1').fadeOut('500');
                 }
             });
         });
@@ -126,7 +139,7 @@
 
         $('#delNo').click(function(event) {
             event.preventDefault();
-            $('.cont-mensaje').fadeOut('500');
+            $('.cont-mensaje-1').fadeOut('500');
         });
 
     });
