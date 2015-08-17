@@ -30,8 +30,15 @@ class Product extends CI_Controller {
     {
         if ($_POST) {
             $this->load->model('product_model');
-            $this->product_model->create();
-            redirect(site_url('product'));
+            $insert_id = $this->product_model->create();
+            
+            if ($this->input->post('request') == 'json') {
+                header('Content-Type: application/json');
+                echo json_encode($insert_id);
+            } else {
+                redirect(site_url('product'));
+            }
+            
         } else {                    
             $this->load->model('category_model');            
             $data['listcategory'] = $this->category_model->all();
