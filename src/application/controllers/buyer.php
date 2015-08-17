@@ -36,8 +36,15 @@ class Buyer extends CI_Controller {
             if (strlen(trim($this->input->post('supplier1'))) > 0) {
                 $this->buyer_model->create_credit($id_buyer);
             }
-            redirect(site_url('buyer'));
-        } else {                    
+            
+            if ($this->input->post('request')=='1') {
+                header('Content-Type: application/json');
+                echo json_encode(true);
+            } else {
+                redirect(site_url('buyer'));
+            }
+            
+        } else {
             $this->load->model('country_model');            
             $data['list_country'] = $this->country_model->all();
             $this->load->model('supplier_model');

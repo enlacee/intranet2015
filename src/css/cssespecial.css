@@ -206,7 +206,7 @@ option{
 	background-color: #fff !important;	
 }
 /* Mensaje de confirmacion */
-.cont-mensaje{
+.cont-mensaje, .cont-mensaje-modal{
 	width: 100vw;
 	height: 100vh;
 	background-color: rgba(0, 0, 0, .5);

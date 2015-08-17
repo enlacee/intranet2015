@@ -52,6 +52,7 @@ class Allocation extends MY_ControllerAdmin {
         } else {
             $this->load->model('buyer_model');
             $this->load->model('colocacion_model');
+            $this->load->model('country_model');   
            
             $data['titulo'] = PUBLIC_URL;
             $data['clientes'] = $this->buyer_model->getlistcliente();
@@ -60,8 +61,9 @@ class Allocation extends MY_ControllerAdmin {
             $data['partners'] = $this->colocacion_model->get_partner(array(), MY_ControllerAdmin::LIMIT_100);
             $data['empleados'] = $this->supplier_model->getList();
             $data['incoterms'] = $this->colocacion_model->get_incoterms(array(), MY_ControllerAdmin::LIMIT_100);
-            $data['payments'] = $this->colocacion_model->get_payment(array(), MY_ControllerAdmin::LIMIT_100);
-            
+            $data['payments'] = $this->colocacion_model->get_payment(array(), MY_ControllerAdmin::LIMIT_100);  
+            //extra (modal)
+            $data['list_country'] = $this->country_model->all();
             $data['anio'] = date('Y');
      
             $this->createScript();

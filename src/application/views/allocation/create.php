@@ -1,7 +1,7 @@
 <?php //var_dump($this->loginData); ?>
 <div class="col-md-10 frm-centrado ">
     <div class="row bg-color-gray">
-        <form role="form">
+        <form action="<?php echo base_url('buyer/create') ?>" method="POST" role="form">
             <div>
                 <input name="anio" type="hidden" size="25"  value="<?php $anio ?>"readonly="yes">
                 <input type="hidden" id="vista" name="vista" value="0">
@@ -574,8 +574,7 @@
         var dataPost = {id : id};
         $.post(url, dataPost)
           .done(function( data ) {
-            $('#myModal').children().html(data);
-            $('#myModal').modal();
+            $('#content-modals').html(data);
         });
         
     }
