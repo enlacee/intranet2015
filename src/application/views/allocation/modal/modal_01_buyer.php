@@ -1,9 +1,5 @@
-
 <!-- MODAL 01 -->
-<!-- Trigger the modal with a button 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
 <div id="myModal" class="modal fade" role="dialog">
-
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -58,7 +54,7 @@
                                     </select>
                                 </div>     
                                 <div class="col-md-3">
-                                    <a href="#" id="addCountry" class="btn btn-primary" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#mContForm" data-backdrop="static">Add</a>
+                                    <a href="#" id="addCountry" class="btn btn-primary" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#myModal2" data-backdrop="static">Add</a>
                                 </div>     
                             </div>
                         </div>      
@@ -81,8 +77,7 @@
     </div>
 </div>
 
-
-<!-- MODAL 02 Buyer -->
+<!-- MODAL 02 -->
 <!-- Mensaje de Confirmacion -->
 <div class="cont-mensaje-modal cont-mensaje-1">
     <div class="mensaje">
@@ -96,7 +91,7 @@
     </div>
 </div>
 
-<div class="modal fade in" id="mContForm" role="dialog" aria-hidden="false">
+<div class="modal fade in" id="myModal2" role="dialog" aria-hidden="false">
     <!-- Modal Personalizado -->
     <div class="porModal" style="display: block;">
         <div class="cont-modalP">
@@ -165,16 +160,14 @@
                     cFila = "<tr><td>" + $('input[name=name]').val() + "</td>";
                     cFila += '<td style="text-align: center;"><a href="delete" class="btn btn-danger del-Country" data-id="' + data + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
                     $('#tableCountry tr:last').after(cFila);
-                    $('#mContForm').modal('toggle');
+                    $('#myModal2').modal('toggle');
                 });
             }
-            ;
         });
 
         // Mensaje de confirmacion
         var idCountry = 0;
         var nFila = 0;
-
         $('#tableCountry').on('click', 'a.del-Country', function(event) {
             event.preventDefault();
             idCountry = $(this).data('id');
@@ -184,8 +177,7 @@
 
         $('#delSi').click(function(event) {
             event.preventDefault();
-            var URL = '<?php echo base_url() ?>';
-            URL += 'country/delete';
+            var URL = "<?php echo base_url('country/delete') ?>";
             var dataPost = {id: idCountry};
             $.post(URL, dataPost, function(data) {
                 if (data > 0) {
@@ -206,38 +198,7 @@
 
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Mensaje de Confirmacion -->
-<!--<div class="cont-mensaje">
-    <div class="mensaje">
-        <div class="header-mensaje">
-            <h4>Confirmar Eliminación</h4>
-        </div>
-        <div class="body-mensaje">
-            <button id="delSi" class="btn btn-danger">Si</button>
-            <button id="delNo" class="btn btn-primary">No</button>
-        </div>    
-    </div>
-</div>-->
-<!-- Fin Mensaje de Confirmacion para eliminar Country -->
-
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         var contact = $('#form-buyer');
         $(contact).validate({
@@ -251,6 +212,5 @@
                 });
             }
         });
-
     });
 </script>
