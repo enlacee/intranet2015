@@ -147,7 +147,6 @@ EOD;
         $view = false;
         
         if ($idForm == 1) {
-            //$this->load->view('buyer/buyer_create_view.php');
             $this->load->model('country_model');            
             $data['list_country'] = $this->country_model->all();
             $this->load->model('supplier_model');
@@ -160,16 +159,26 @@ EOD;
             $this->load->view('allocation/modal/modal_02_supplier.php', $data);
         } elseif($idForm == 3) {
             
+            $this->load->model('category_model');
+            $this->load->model('supplier_model');
+            $this->load->model('product_model');
+            
+            $this->load->model('country_model');            
+            $data['list_country'] = $this->country_model->all();
+            
+            $data['list_category'] = $this->category_model->all();
+            $data['id_proveedor'] = $this->input->post('id_proveedor');
+            //var_dump($this->input->post()); exit;
+            //var_dump($this->product_model->getCategoria());exit;
+            $dataRs = $this->supplier_model->get_searchByDataById($data['id_proveedor']);
+            //var_dump( $dataRs );exit;
+            $data['id_category'] = !empty($dataRs->id_category) ? $dataRs->id_category : '';
+            $data['empleados'] = $this->supplier_model->getList();            
+            $data['list_credit'] = $this->supplier_model->all_credit();
+            $this->load->view('allocation/modal/modal_03_product.php', $data);
         }
         
         return $view;
     }
-    
-    private function modal_buyer()
-    {
-         
-    }
-    
-    
     
 }

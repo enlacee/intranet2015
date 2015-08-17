@@ -4,67 +4,50 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Add New Buyer</h4>
+                <h4 class="modal-title" id="myModalLabel">Add New Product</h4>
             </div>
-            <form id="form-buyer" name="form-buyer" method="POST" 
-                  action="<?php echo base_url('buyer/create') ?>">
+            <form id="myform" name="myform" method="POST" action="<?php echo base_url('product/create') ?>">
                 <input type="hidden" name="request" value="json" />
-
+                
                 <div class="modal-body">
-
                     <div class="table-responsive" style="height: 450px; padding: 0 15px 0 0;">
                         <!--inicio-->                    
                         <div class="form-group">
-                            <label for="txtName">Name</label>
-                            <input type="text" name="namebuyer" class="form-control required" id="txtName" required="" maxlength="25" autofocus="">
+                            <label for="txtName">Category</label>
+                            <select name="id_category" class="form-control required" id="id_category">
+                                <option value="">-</option>
+                                <?php if (count($list_category) > 0): ?>
+                                    <?php foreach ($list_category as $category): ?>
+                                        <?php $selected = ($id_category == $category->id) ? 'selected' : '' ?>
+                                        <option value="<?php echo $category->id; ?>" <?php echo $selected ?>><?php echo $category->name; ?></option>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <option value="">no found</option>
+                                <?php endif; ?>
+                            </select>                            
                         </div>      
                         <div class="form-group">
-                            <label for="txtRuc">RUC</label>
-                            <input type="text" name="ruc" class="form-control" id="txtRuc" maxlength="50">
+                            <label for="txtName">Supplier</label>
+                            <select name="id_supplier" class="form-control required" id="id_supplier">
+                                <option value="">-</option>
+                                <?php if (count($empleados) > 0): ?>
+                                    <?php foreach ($empleados as $key => $array): ?>
+                                        <?php $selected = ($id_proveedor == $array['id']) ? 'selected' : '' ?>
+                                        <option value="<?php echo $array['id']; ?>" <?php echo $selected ?>><?php echo $array['nombres']; ?></option>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <option value="">no found</option>
+                                <?php endif; ?>
+                            </select>  
                         </div>
                         <div class="form-group">
-                            <label for="txtAddress">Address</label>
-                            <input type="text" name="address" class="form-control" id="txtAddress" maxlength="50">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" class="form-control required" id="name" maxlength="15">
                         </div>
+   
                         <div class="form-group">
-                            <label for="txtWeb">Web</label>
-                            <input type="text" name="web" class="form-control" id="txtWeb" maxlength="100">
-                        </div>
-                        <div class="form-group">
-                            <label for="txtFax">Fax</label>
-                            <input type="text" name="fax" class="form-control" id="txtFax" maxlength="15">
-                        </div>
-                        <div class="form-group">
-                            <label for="txtTelephone">Telephone</label>
-                            <input type="text" name="telephone" class="form-control" id="txtTelephone" maxlength="15">
-                        </div>      
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <label for="selCountry">Country</label>
-                                    <select name="country" class="form-control" id="sltCountry" required="">
-                                        <option value="">-</option>
-                                        <?php if (count($list_country) > 0): ?>
-                                            <?php foreach ($list_country as $country): ?>
-                                                <option value="<?php echo $country->id; ?>"><?php echo $country->name ?></option>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <option value="">no found</option>
-                                        <?php endif; ?>
-                                    </select>
-                                </div>     
-                                <div class="col-md-3">
-                                    <a href="#" id="addCountry" class="btn btn-primary" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#myModal2" data-backdrop="static">Add</a>
-                                </div>     
-                            </div>
-                        </div>      
-                        <div class="form-group">
-                            <label for="txtEmail">E-Mail</label>
-                            <input type="email" name="email" class="form-control" id="txtEmail" maxlength="50">
-                        </div>
-                        <div class="form-group">
-                            <label for="txtObs">Description</label>
-                            <textarea name="description" id="txtObs" class="form-control" rows="3" maxlength="250"></textarea>
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" class="form-control" rows="3" maxlength="250"></textarea>
                         </div>
 
                         <input type="submit" class="btn btn-primary comSeparator" value="Save">
@@ -89,7 +72,7 @@
                 <div class="modalPCuerpo">                
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control required" id="name" name="name">
+                        <input type="text" class="form-control required" id="namex" name="namex">
                     </div>
                     <div class="table-responsive" style="height: 280px; padding: 0 15px 0 0;">
                         <table id="tableCountry" class="table table-condensed table-bordered table-hover table-fondo">                  
@@ -200,17 +183,26 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        var contact = $('#form-buyer');
+        var contact = $('#myform');
         $(contact).validate({
             submitHandler: function(form) {
                 var URL = contact.attr('action');
                 $.post(URL, contact.serialize(), function(data) {
-                    if (data == true) {
+                    if (data) {
+                        var $select = $('#id_producto');
+                        var name = $('#myform')[0][3].value;
+                        $select
+                            .append($("<option></option>")
+                            .attr("value", data)
+                            .text(name));
+                        $select.val(data);
                         $('#myModal').modal('hide');
-                        window.location = "<?php echo base_url('/allocation/create') ?>";
+                    } else {
+                        alert("error request")
                     }
-                });
+                });   
             }
         });
     });
 </script>
+

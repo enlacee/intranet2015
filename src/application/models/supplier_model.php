@@ -3,7 +3,9 @@
  * Empleados
  */
 class Supplier_Model extends CI_Model{
-
+    
+    const STATUS_A = 'a';
+    
     private $table;
     private $tablePartner;
 
@@ -116,6 +118,7 @@ class Supplier_Model extends CI_Model{
 
         $this->db->select();
         $this->db->from($this->table);
+        $this->db->where('estado', Supplier_Model::STATUS_A);
 
         // -------- init
         if (!empty($limit) && !empty ($offset)) {
@@ -183,6 +186,16 @@ class Supplier_Model extends CI_Model{
         return $rs;
     }
     
-    
+    /**
+     * get category detail by id_supplier
+     * @return type
+     */
+    public function get_searchByDataById($id_supplier)
+    {
+        $this->db->select();
+        $this->db->from($this->tableProduc);
+        $this->db->where('id_supplier', $id_supplier);
+        return $this->db->get()->row();  
+    }
 
 }

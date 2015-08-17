@@ -30,12 +30,14 @@ class Product extends CI_Controller {
     {
         if ($_POST) {
             $this->load->model('product_model');
-            $insert_id = $this->product_model->create();
-            
+
             if ($this->input->post('request') == 'json') {
+                $dataFormateado = $this->formatatDataPost($this->input->post());
+                $insert_id = $this->product_model->create($dataFormateado);
                 header('Content-Type: application/json');
                 echo json_encode($insert_id);
             } else {
+                $insert_id = $this->product_model->create();
                 redirect(site_url('product'));
             }
             
@@ -50,6 +52,20 @@ class Product extends CI_Controller {
             $this->load->view('product/product_create_view', $data);
             $this->load->view('includes/footer');
         }           
+    }
+    
+    /**
+     * cambiar datos del post (por dintinto formularios)
+     */
+    public function formatatDataPost($dataPost){
+        $data = array(          
+            'id_category' => $dataPost['id_category'],       
+            'id_supplier' => $dataPost['id_supplier'],
+            'name' => $dataPost['name'],                        
+            'description' => $dataPost['description']
+        );
+        
+        return $data;        
     }
 
     public function edit()

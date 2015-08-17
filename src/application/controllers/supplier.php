@@ -31,7 +31,7 @@ class Supplier extends CI_Controller {
         if ($_POST) {
             $this->load->model('supplier_model');
             $this->supplier_model->create();
-            redirect(site_url('supplier'));
+                redirect(site_url('supplier'));
         } else {                    
             $this->load->model('country_model');            
             $data['list_country'] = $this->country_model->all();

@@ -8,33 +8,39 @@
             </div>
 
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group form-group-black">
                     <label for="dates">Date</label>
                     <input type="text" class="form-control" id="dates">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group form-group-black">
                     <label for="po_number">P/O Number :</label>
                     <input type="text"  class="form-control" id="po_number">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group form-group-black">
                     <label for="id_cli">Buyer:</label>
-                    <select name="id_cli" class="form-control col-lg-5 bg-color-gray" id="id_cli">
+                    <select name="id_cli" class="form-control col-md-6 bg-color-gray" id="id_cli">
                         <option>--------- Selected ---------</option>
                         <?php if (count($clientes) > 0): ?>
                             <?php foreach ($clientes as $key => $value): ?>
                                 <option value="<?php echo $value['id'] ?>"><?php echo $value['name'] ?></option>
                             <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="">no found</option>
                         <?php endif; ?>
                     </select>
-                    <input type="boton" name="Submit243" class="form-control btn btn-primary Estilo43" 
-                           onclick="javascript:loadForm(this)" value="Add  Buyer"
-                        data-url-id="1">
                     
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group form-group-black">
+                    <label for="id_cli">&nbsp;</label>
+                    <input type="boton" name="Submit243" class="form-control btn btn-primary col-md-6" 
+                        onclick="javascript:loadForm(this)" value="Add Buyer" data-url-id="1">
                 </div>
             </div>
         </form>
@@ -144,14 +150,15 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Products</label>
                 <div class="col-lg-10 nopadding">                        
-                    <div class="col-sm-5">
-                        
-                        <select name="id_producto" class="form-control col-lg-5" id="id_producto" >
+                    <div class="col-sm-5">                        
+                        <select name="id_producto" id="id_producto" class="form-control col-lg-5"  >
                             <option value="">-</option>
                         </select>
                     </div>
                     <div class="col-sm-5">
-                        <input type="button" name="Submit242"  class="btn btn-primary" onclick="javascript:browse1()" value="New">
+                        <input type="button" name="Submit242"  class="btn btn-primary" 
+                               onclick="javascript:loadForm(this, {id_proveedor: document.getElementById('id_proveedor').value})" value="New"
+                            data-url-id="3">
                     </div>
 
                 </div>
@@ -566,12 +573,21 @@
 
     });
     
-    
-    function loadForm(dom) {
+    /**
+    * 
+
+     * @param {type} dom
+     * @param {type} extraData only object
+     * @returns {undefined}     */
+    function loadForm(dom, extraData) {
         var url = '<?php echo site_url('allocation/modal_general') ?>';
         var id = dom.getAttribute('data-url-id'); 
        
-        var dataPost = {id : id};
+       var dataPost = {};
+        if (typeof(extraData) !== 'undefined'){
+            dataPost = extraData;
+        }
+        dataPost.id = id;
         $.post(url, dataPost)
           .done(function( data ) {
             $('#content-modals').html(data);

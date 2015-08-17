@@ -37,7 +37,7 @@ class Buyer extends CI_Controller {
                 $this->buyer_model->create_credit($id_buyer);
             }
             
-            if ($this->input->post('request')=='1') {
+            if ($this->input->post('request') == 'json') {
                 header('Content-Type: application/json');
                 echo json_encode(true);
             } else {

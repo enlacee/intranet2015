@@ -18,15 +18,21 @@ class Product_Model extends CI_Model{
         }   
     }
 
-    public function create()
+    public function create($dataPost = array())
     {
-        $data = array(          
-            'id_category' => $this->input->post('id_category'),                        
-            'id_supplier' => $this->input->post('id_supplier'),
-            'name' => $this->input->post('nameproduct'),                        
-            'description' => $this->input->post('description')
-            );
+        if (count($dataPost)>0){
+            $data = $dataPost;
+        } else {
+            $data = array(          
+                'id_category' => $this->input->post('id_category'),                        
+                'id_supplier' => $this->input->post('id_supplier'),
+                'name' => $this->input->post('nameproduct'),                        
+                'description' => $this->input->post('description')
+                );
+        }
+
         $this->db->insert('product', $data);
+        return $this->db->insert_id();
     }
 
     public function edit($id)
@@ -58,5 +64,5 @@ class Product_Model extends CI_Model{
             $this->session->set_flashdata('delete', 1);
         }        
     }
-
+    
 }
