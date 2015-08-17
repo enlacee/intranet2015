@@ -6,17 +6,15 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Add New Suppliers</h4>
             </div>
-            <form id="form-buyer" name="form-buyer" method="POST" 
-                  action="<?php echo base_url('buyer/create') ?>">
-                <input type="hidden" name="request" value="1" />
+            <form id="myform" name="myform" method="POST" action="<?php echo base_url('supplier/create') ?>" novalidate>
+                <input type="hidden" name="request" value="json" />
 
-                <div class="modal-body">      
-
+                <div class="modal-body">
                     <div class="table-responsive" style="height: 450px; padding: 0 15px 0 0;">
                         <!--inicio-->                    
                         <div class="form-group">
                             <label for="txtName">Name</label>
-                            <input type="text" name="nombres" class="form-control" id="txtName" required maxlength="25" autofocus>
+                            <input type="text" name="nombres" class="form-control required" id="txtName" required maxlength="25" autofocus>
                         </div>      
                         <div class="form-group">
                             <label for="txtTelephone">Telephone</label>
@@ -34,21 +32,19 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <label for="selCountry">Country</label>
-                                    <select name="pais" class="form-control" id="sltCountry" required>
-                                        <option value="0">::No definido::</option>
-                                        <?php
-                                        if (count($list_country) > 0) {
-                                            foreach ($list_country as $country) {
-                                                ?>                  
+                                    <select name="pais" class="form-control" id="sltCountry" class="required" required>
+                                        <option value="">-</option>
+                                        <?php if (count($list_country) > 0): ?>
+                                            <?php foreach ($list_country as $country): ?>
                                                 <option value="<?php echo $country->id; ?>"><?php echo $country->name; ?></option>
-                                                <?php
-                                            }
-                                        }
-                                        ?>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <option value="">no found</option>
+                                        <?php endif; ?>
                                     </select>
                                 </div>     
                                 <div class="col-md-3">
-                                    <button id="addCountry" class="btn btn-info" style="margin-top: 26px; width: 100%; height: 39px" data-toggle="modal" data-target="#mContForm" data-backdrop="static">Add</button>
+                                    <a href="#" id="addCountry" class="btn btn-primary" style="margin-top: 26px; width: 100%;" data-toggle="modal" data-target="#myModal2" data-backdrop="static">Add</a>
                                 </div>     
                             </div>
                         </div>
@@ -81,7 +77,7 @@
             <div class="modalPTitulo">
                 <p>Add New Country</p>        
             </div>
-            <form id="frmAddCountry" action="<?php echo base_url('buyer/create') ?>" method="post" accept-charset="utf-8">
+            <form id="frmAddCountry" action="<?php echo base_url('country/create') ?>" method="post" accept-charset="utf-8">
                 <div class="modalPCuerpo">                
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -141,7 +137,81 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#myModal').modal('show');
+        // register items
+        var $frmAddCountry = $('#frmAddCountry');
+        $frmAddCountry.submit(function(event) {
+            event.preventDefault();
+            if ($.trim($('input[name=name]').val()) == '') {
+                $('input[name=name]').focus();
+            } else {
+                var URL = $frmAddCountry.attr('action');
+                var dataPost = {name: $('input[name=name]').val()}
 
+                $.post(URL, dataPost, function(data) {
+                    $('#sltCountry').append('<option value="' + data + '" selected>' + $('input[name=name]').val() + '</option>');
+                    cFila = "<tr><td>" + $('input[name=name]').val() + "</td>";
+                    cFila += '<td><a href="delete" class="btn btn-danger del-Country" data-id="' + data + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
+                    $('#tableCountry tr:last').after(cFila);
+                    $('input[name=name]').val('')
+                    $('#myModal2').modal('toggle');
+                });
+            }
+        });
+
+        // Mensaje de confirmacion
+        var idCountry = 0;
+        var nFila = 0;
+        $('#tableCountry').on('click', 'a.del-Country', function(event) {
+            event.preventDefault();
+            idCountry = $(this).data('id');
+            nFila = $(this).parent().parent().index();
+            $('.cont-mensaje-1').fadeIn('500');
+        });
+
+        $('#delSi').click(function(event) {
+            event.preventDefault();
+            var URL = "<?php echo base_url('country/delete') ?>";
+            var dataPost = {id: idCountry};
+            $.post(URL, dataPost, function(data) {
+                if (data > 0) {
+                    $('#tableCountry tbody tr:eq(' + nFila + ')').remove();
+                    $('#sltCountry option[value=' + idCountry + ']').remove();
+                    $('.cont-mensaje-1').fadeOut('500');
+                } else {
+                    $('.cont-mensaje-1').fadeOut('500');
+                }
+            });
+        });
+        // Fin del Mensaje de confirmación
+
+        $('#delNo').click(function(event) {
+            event.preventDefault();
+            $('.cont-mensaje-1').fadeOut('500');
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var contact = $('#myform');
+        $(contact).validate({
+            submitHandler: function(form) {
+                var URL = contact.attr('action');
+                $.post(URL, contact.serialize(), function(data) {
+                    if (data) {
+                        var $select = $('#id_proveedor');
+                        var name = contact[0][1].value;
+                        $select
+                            .append($("<option></option>")
+                            .attr("value", data)
+                            .text(name));
+                        $select.val(data);
+                        $('#myModal').modal('hide');
+                    } else {
+                        alert("error request")
+                    }
+                });   
+            }
+        });
     });
 </script>
 
