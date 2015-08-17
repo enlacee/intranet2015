@@ -41,6 +41,8 @@ class Supplier_Model extends CI_Model{
             'credito' => $this->input->post('credito')
             );
         $this->db->insert('supplier', $data);
+        
+        return $this->db->insert_id();
     }
 
     public function edit($id)
