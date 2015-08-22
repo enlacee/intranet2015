@@ -179,7 +179,10 @@ EOD;
             $data['list_credit'] = $this->supplier_model->all_credit();
             $this->load->view('allocation/modal/modal_03_product.php', $data);
         } elseif($idForm == 4) {
-            $this->load->view('allocation/modal/modal_04_partner.php', array());
+            $this->load->model('partner_model');
+            $data['partners'] = $this->partner_model->all();
+            $this->load->view('allocation/modal/modal_04_partner.php', $data);
+            
         } elseif($idForm == 5) {
             $this->load->view('allocation/modal/modal_05_incoterms.php', array());
         } elseif($idForm == 6) {
