@@ -1,4 +1,6 @@
-<?php //var_dump($this->loginData); ?>
+<?php 
+    $id_p = $this->loginData->id_perfil;
+?> 
 <div class="col-md-10 frm-centrado ">
     <div class="row bg-color-gray">
         <form action="<?php echo base_url('buyer/create') ?>" method="POST" role="form">
@@ -168,7 +170,7 @@
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Partner</label>
                 <div class="col-lg-10 nopadding">                        
-                    <div class="col-sm-5">
+                    <div class="col-sm-5">      
                         <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
                             <?php if (count($partners) > 0): ?>
                                 <option value="">-</option>
@@ -188,7 +190,7 @@
                 </div>
             </div>
             
-            
+            <?php if (true/*$id_p == "p01" || $id_p == "p02" || $id_p == "p04"*/): ?>
             <!-- Partner Comm -->
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Partner Comm</label>
@@ -252,18 +254,19 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             
-            
+            <?php if (/*$id_p == "p03" || $id_p == "p02" || $id_p == "p04"*/true): ?>
             <!-- Inside Pers -->
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Inside Pers</label>
-                <div class="col-lg-10 nopadding">                        
+                <div class="col-lg-10 nopadding">    <?php //echo "<pre>"; print_r($insides); exit;?>                    
                     <div class="col-sm-5">
-                        <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
-                            <?php if (count($partners) > 0): ?>
+                        <select name="insides" id="insides" class="form-control col-lg-5"   onChange="ver();">
+                            <?php if (count($insides) > 0): ?>
                                 <option value="">-</option>
-                            <?php foreach ($partners as $key => $value): ?>
-                                <option value="<?php echo $value['partner'] ?>"><?php echo $value['nombre'] ?></option>
+                            <?php foreach ($insides as $key => $value): ?>
+                                <option value="<?php echo $value['id_inside'] ?>"><?php echo $value['nombre'] ?></option>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <option value="">no records.</option>
@@ -276,7 +279,9 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
 
+            <?php if ($id_p == "p01" || $id_p == "p02" || $id_p == "p04"): ?>
             <!--  Inside Comm -->
             <div class="form-group">
                 <label for="qty" class="col-lg-2 control-label">Inside Comm</label>
@@ -315,6 +320,7 @@
                 </div>
             </div>
             </div>
+            <?php endif; ?>
             
             <!--  Income US$ -->
             <div class="form-group">
@@ -394,7 +400,7 @@
                 <label for="qty" class="col-lg-2 control-label">Incoterms</label>
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">
-                        <select name="partner" id="partner" class="form-control col-lg-5" onChange="ver();">
+                        <select name="incoterms" id="incoterms" class="form-control col-lg-5" onChange="ver();">
                             <?php if (count($incoterms) > 0): ?>
                                 <option value="">-</option>
                             <?php foreach ($incoterms as $key => $value): ?>
@@ -414,10 +420,10 @@
             
             <!-- Payment Terms -->
             <div class="form-group">
-                <label for="qty" class="col-lg-2 control-label">Payment Terms</label>
+                <label for="payment" class="col-lg-2 control-label">Payment Terms</label>
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">
-                        <select name="partner" id="partner" class="form-control col-lg-5" onChange="ver();">
+                        <select name="payment" id="payment" class="form-control col-lg-5" onChange="ver();">
                             <?php if (count($payments) > 0): ?>
                                 <option value="">-</option>
                             <?php foreach ($payments as $key => $value): ?>
@@ -437,7 +443,7 @@
             
             <!-- ETD -->
             <div class="form-group">
-                <label for="qty" class="col-lg-2 control-label">ETD</label>
+                <label for="etd" class="col-lg-2 control-label">ETD</label>
                 <div class="col-sm-3">                        
                     <input type="text" name="etd" id="etd" class="form-control"/>
                 </div>
@@ -445,7 +451,7 @@
             
             <!-- ETA -->
             <div class="form-group">
-                <label for="qty" class="col-lg-2 control-label">ETA</label>
+                <label for="eta" class="col-lg-2 control-label">ETA</label>
                 <div class="col-sm-3">                        
                     <input type="text" name="eta" id="eta" class="form-control"/>
                 </div>
@@ -453,18 +459,18 @@
             
             <!-- Invoice number -->
             <div class="form-group">
-                <label for="qty" class="col-lg-2 control-label">Invoice number</label>
+                <label for="envoice" class="col-lg-2 control-label">Invoice number</label>
                 <div class="col-sm-3">                        
-                    <input type="text" class="form-control"/>
+                    <input type="text" name="envoice" id="envoice" class="form-control"/>
                 </div>
             </div>
             
             <!-- Remarks -->
             <div class="form-group">
-                <label for="qty" class="col-lg-2 control-label">Invoice number</label>
+                <label for="observaciones" class="col-lg-2 control-label">Remarks</label>
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">
-                        <textarea name="message" class="form-control required" rows="5" aria-required="true"></textarea>
+                        <textarea name="observaciones"  id="observaciones" class="form-control required" rows="5" aria-required="true"></textarea>
                     </div>
                     <div class="col-sm-5 ">
 

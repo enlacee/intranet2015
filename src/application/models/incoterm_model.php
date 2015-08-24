@@ -1,12 +1,12 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Partner_Model extends CI_Model {
+class Incoterm_Model extends CI_Model {
     
     private $table;
 
     public function __construct() {
         parent::__construct();
-        $this->table = 'partner';
+        $this->table = 'incoterms';
     }
     
 /**
@@ -16,12 +16,12 @@ class Partner_Model extends CI_Model {
  */
     public function all($estado='a')
     {
-        $this->db->select('partner, nombre');
+        $this->db->select('incoterms, nombre');
         $this->db->from($this->table);
         if (!empty($estado)) {
             $this->db->where('estado', $estado);
         }
-        $this->db->order_by('partner', 'asc');
+        $this->db->order_by('incoterms', 'asc');
         $list = $this->db->get();
         if ($list->num_rows() > 0) {
             return $list->result();
@@ -40,7 +40,7 @@ class Partner_Model extends CI_Model {
 
     public function delete($id)
     {
-        $this->db->where('partner', $id);
+        $this->db->where('incoterms', $id);
         $this->db->delete($this->table);
         return $this->db->affected_rows();
     }

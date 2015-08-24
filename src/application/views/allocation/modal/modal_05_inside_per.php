@@ -4,9 +4,9 @@
     <div class="porModal" style="display: block;">
         <div class="cont-modalP">
             <div class="modalPTitulo">
-                <p>Add New Partner</p>        
+                <p>Add New Inside Pers</p>        
             </div>
-            <form id="myform" name="myform" action="<?php echo base_url('partner/create') ?>" method="post" accept-charset="utf-8">
+            <form id="myform" name="myform" action="<?php echo base_url('inside/create') ?>" method="post" accept-charset="utf-8">
                 <div class="modalPCuerpo">                
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -20,12 +20,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (count($partners) > 0): ?>
-                                    <?php foreach ($partners as $partner): ?>
+                                <?php if (count($insides) > 0): ?>
+                                    <?php foreach ($insides as $partner): ?>
                                         <tr>
-                                            <td><?php echo $partner->nombre ?></td>
+                                            <td><?php echo $partner['nombre'] ?></td>
                                             <td>
-                                                <a href="delete" class="btn btn-danger del-Country" data-id="<?php echo $partner->partner; ?>">
+                                                <a href="delete" class="btn btn-danger del-Country" data-id="<?php echo $partner['id_inside']; ?>">
                                                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                                 </a>
                                             </td>
@@ -72,12 +72,13 @@
             event.preventDefault();
             if ($.trim($('input[name=name]').val()) == '') {
                 $('input[name=name]').focus();
+                alert('would record incoterms');
             } else {
                 var URL = $frmAddCountry.attr('action');
                 var dataPost = {name: $('input[name=name]').val()}
 
                 $.post(URL, dataPost, function(data) {
-                    $('#partner').append('<option value="' + data + '" selected>' + $('input[name=name]').val() + '</option>');
+                    $('#insides').append('<option value="' + data + '" selected>' + $('input[name=name]').val() + '</option>');
                     
                     cFila = "<tr><td>" + $('input[name=name]').val() + "</td>";
                     cFila += '<td><a href="delete" class="btn btn-danger del-Country" data-id="' + data + '"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td></tr>';
@@ -100,13 +101,13 @@
 
         $('#delSi').click(function(event) {
             event.preventDefault();
-            var URL = "<?php echo base_url('partner/delete') ?>";
+            var URL = "<?php echo base_url('inside/delete') ?>";
             var dataPost = {id: idCountry};
             $.post(URL, dataPost, function(data) {
                 if (data > 0) {
                     $('#tableCountry tbody tr:eq(' + nFila + ')').remove();
                     
-                    $('#partner option[value=' + idCountry + ']').remove();
+                    $('#insides option[value=' + idCountry + ']').remove();
                     $('.cont-mensaje-1').fadeOut('500');
                 } else {
                     $('.cont-mensaje-1').fadeOut('500');

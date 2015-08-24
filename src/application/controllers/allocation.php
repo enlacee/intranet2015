@@ -54,16 +54,19 @@ class Allocation extends MY_ControllerAdmin {
         } else {
             $this->load->model('buyer_model');
             $this->load->model('colocacion_model');
-            $this->load->model('country_model');   
+            $this->load->model('country_model');
+            $this->load->model('inside_model');
+            $this->load->model('payment_model');
            
             $data['titulo'] = PUBLIC_URL;
             $data['clientes'] = $this->buyer_model->getlistcliente();
             $data['products'] = array();
+            $data['insides'] = $this->inside_model->all();
             //$this->colocacion_model->get_list_anio_detalle_colocaciones($id_colocaciones,$myinside);
             $data['partners'] = $this->colocacion_model->get_partner(array(), MY_ControllerAdmin::LIMIT_100);
             $data['empleados'] = $this->supplier_model->getList();
             $data['incoterms'] = $this->colocacion_model->get_incoterms(array(), MY_ControllerAdmin::LIMIT_100);
-            $data['payments'] = $this->colocacion_model->get_payment(array(), MY_ControllerAdmin::LIMIT_100);  
+            $data['payments'] = $this->payment_model->all();
             //extra (modal)
             $data['list_country'] = $this->country_model->all();
             $data['anio'] = date('Y');
@@ -184,11 +187,22 @@ EOD;
             $this->load->view('allocation/modal/modal_04_partner.php', $data);
             
         } elseif($idForm == 5) {
-            $this->load->view('allocation/modal/modal_05_incoterms.php', array());
+            $this->load->model('inside_model');
+            
+            $data['insides'] = $this->inside_model->all();
+            $this->load->view('allocation/modal/modal_05_inside_per.php', $data);
+            
         } elseif($idForm == 6) {
-            $this->load->view('allocation/modal/modal_06_inside_per.php', array());
+            $this->load->model('incoterm_model');
+            $data['incoterms'] = $this->incoterm_model->all();
+            $this->load->view('allocation/modal/modal_06_itercoms.php', $data);
+            
         } elseif($idForm == 7) {
-            $this->load->view('allocation/modal/modal_07_payment_term.php', array());
+            $this->load->model('colocacion_model');
+            $this->load->model('payment_model');
+            
+            $data['payments'] = $this->payment_model->all();
+            $this->load->view('allocation/modal/modal_07_payment_term.php', $data);
         }
         
         return $view;
