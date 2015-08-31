@@ -171,7 +171,7 @@
                 <label for="qty" class="col-lg-2 control-label">Partner</label>
                 <div class="col-lg-10 nopadding">                        
                     <div class="col-sm-5">      
-                        <select name="partner" id="partner" class="form-control col-lg-5"   onChange="ver();">
+                        <select name="partner" id="partner" class="form-control col-lg-5" onchange="selectPartner()">
                             <?php if (count($partners) > 0): ?>
                                 <option value="">-</option>
                                 <?php foreach ($partners as $key => $value): ?>
@@ -576,12 +576,6 @@
             $( "#insideus-comision-extra li:nth-child(5)" ).css('display', 'block')
         }      
     }
-
-    $(document).ready(function(){
-       
-
-
-    });
     
     /**
     * 
@@ -602,9 +596,26 @@
           .done(function( data ) {
             $('#content-modals').html(data);
         });
-        
     }
     
+    //
+    function selectPartner(){
+        var idPartner = $('#partner').val();
+       
+        if (idPartner == '') {
+           $('#partner_comision').attr("disabled", true);
+        } else {
+           $('#partner_comision').removeAttr("disabled");
+        }
+    }
+    /**
+     * 
+     * ready dom
+     */
+    $(document).ready(function(){
+        // login form
+
+    });
 </script>
 
 <?php require_once 'modal/modal.php' ?>
